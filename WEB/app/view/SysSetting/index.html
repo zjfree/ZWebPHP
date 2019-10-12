@@ -1,0 +1,88 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_config';
+</script>
+
+<h3 class="page-header"><i class="fa fa-sliders"></i> 系统配置</h3>
+
+<nav>
+<div class="nav nav-tabs">
+<a class="nav-item nav-link active" href="#">基础配置</a>
+</div>
+</nav>
+
+<form id="frmItem" method="POST" action="/index.php?_=sys_setting::save">
+<input type="hidden" name="type" value="sys_base" />
+<table class="tb-form m-10">
+    <tr>
+        <th>系统安装时间：</th>
+        <td>
+            { $item.install_time }
+        </td>
+    </tr>
+    <tr>
+        <th>公司名称：</th>
+        <td>
+            <input type="text" required autofocus name="arr[name]" class="form-control form-control-sm" value="{ $item.name }" />
+        </td>
+    </tr>
+    <tr>
+        <th>公司英文名称：</th>
+        <td>
+            <input type="text" name="arr[english]" class="form-control form-control-sm" value="{ $item.english }" />
+        </td>
+    </tr>
+    <tr>
+        <th>打印附加信息：</th>
+        <td>
+            <input type="text" name="arr[print]" class="form-control form-control-sm" value="{ $item.print }" />
+        </td>
+    </tr>
+    <tr>
+        <th>公司电话：</th>
+        <td>
+            <input type="text" required name="arr[tel]" class="form-control form-control-sm" value="{ $item.tel }" />
+        </td>
+    </tr>
+    <tr>
+        <th>品牌列表：</th>
+        <td>
+            <input type="text" name="arr[brand_list]" class="form-control form-control-sm" value="{ $item.brand_list }" style="width:100%;" />
+            <small>多个使用逗号(,)分隔</small>
+        </td>
+    </tr>
+    <tr>
+        <th>公告：</th>
+        <td>
+            <textarea name="arr[notice]" class="form-control form-control-sm">{ $item.notice }</textarea>
+        </td>
+    </tr>
+    <tr>
+        <th>备注：</th>
+        <td>
+            <textarea name="arr[memo]" class="form-control form-control-sm">{ $item.memo }</textarea>
+        </td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>
+            <div class="form-error"></div>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+<script>
+$(function(){
+    $('#frmItem').submit(function(){
+        Z.ajaxSubmit(this, function(){
+            Z.alertMsg('信息修改成功');
+        });
+        return false;
+    });
+});
+</script>
+
+{ include '../main_bottom.html' }

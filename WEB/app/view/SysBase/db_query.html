@@ -1,0 +1,81 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_debug';
+</script>
+
+<h3 class="page-header"><i class="fa fa-bug"></i> 数据库查询</h3>
+
+<form id="frmList" method="POST" class="mb-2">
+SQL语句：
+<div class="input-group">
+<input id="sql" name="sql" type="text" class="form-control" placeholder="SQL 语句" value="{ $sql }" autofocus required autocomplete="OFF" >
+<div class="input-group-append">
+    <button type="submit" class="btn btn-primary"><i class="fa fa-repeat"></i></button>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu">
+    <a class="dropdown-item" href="javascript:run_sql('SHOW TABLE STATUS');">所有表</a>
+    <a class="dropdown-item" href="javascript:run_sql('show columns from `table1`')">所有列</a>
+    <a class="dropdown-item" href="javascript:run_sql('show create table `table1`')">创建表</a>
+    <div role="separator" class="dropdown-divider"></div>
+    <a class="dropdown-item" href="javascript:run_sql('show full processlist')">运行状况</a>
+    <a class="dropdown-item" href="javascript:run_sql('show global status')">show global status</a>
+    <a class="dropdown-item" href="javascript:run_sql('show status')">show status</a>
+    <a class="dropdown-item" href="javascript:run_sql('show warnings')">show warnings</a>
+    <a class="dropdown-item" href="javascript:run_sql('show errors')">show errors</a>
+    <a class="dropdown-item" href="javascript:run_sql('show variables')">show variables</a>
+    
+    </div>
+</div>
+</div>
+
+</form>
+
+{ if $error != '' }
+<div class="alert alert-danger" role="alert">{ $error }</div>
+{ else if empty($list) }
+<div class="alert alert-primary" role="alert">无数据</div>
+{ else }
+<div class="tbListDiv">
+<table class="tbList fix-header" style="font-size:12px;">
+    <thead>
+        <tr>
+        { foreach $list[0] as $k => $v }
+        <th>{ $k }</th>
+        { /foreach }
+        </tr>
+    </thead>
+    <tbody style="font-family: Consolas, Courier New;">
+        { foreach $list as $rr } 
+        <tr>
+        { if $sql == 'SHOW TABLE STATUS' }
+        { foreach $rr as $k => $v }
+        { if $k == 'name' }
+        <td><a href="javascript:run_sql('SELECT * FROM { $v } LIMIT 1000');">{ $v }</a></td>
+        { else }
+        <td>{ $v|z_cut:50 }</td>
+        { /if }
+        { /foreach }
+        { else }
+        { foreach $rr as $r }
+        <td>{ $r|z_cut:50 }</td>
+        { /foreach }
+        { /if }
+        </tr>
+        { /foreach }
+    </tbody>
+</table>
+</div>
+{ /if }
+
+<script>
+function run_sql(sql)
+{
+    $('#sql').val(sql);
+    $('#frmList').submit();
+}
+</script>
+
+{ include '../main_bottom.html' }

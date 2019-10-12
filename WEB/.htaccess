@@ -1,0 +1,5 @@
+Header add Access-Control-Allow-Origin "*"
+RewriteEngine on
+
+Rewriterule ^(\w+)$ /index.php?_=$1 [QSA,L]
+Rewriterule ^(\w+)\.\.(\w+)$ /index.php?_=$1::$2 [QSA,L]

@@ -1,0 +1,65 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_index';
+    Z.config.navBreadcrumb = '当前用户信息';
+</script>
+
+<h3 class="page-header"><i class="fa fa-user-circle"></i> { $_user.name } ({ $_user.account })</h3>
+
+<nav>
+<div class="nav nav-tabs">
+<a class="nav-item nav-link" href="/index.php?_=my">用户信息</a>
+<a class="nav-item nav-link" href="/index.php?_=my::passwd">修改密码</a>
+<a class="nav-item nav-link active">编辑信息</a>
+</div>
+</nav>
+
+<form id="frmItem" method="POST" action="/index.php?_=my::save">
+<table class="tb-form m-10">
+    <tr>
+        <th>账号：</th>
+        <td>{ $_user.account }</td>
+    </tr>
+    <tr>
+        <th>名称：</th>
+        <td><input type="text" required autofocus name="name" class="form-control form-control-sm" value="{ $_user.name }" /></td>
+    </tr>
+    <tr>
+        <th>手机号：</th>
+        <td><input type="text" name="phone" class="form-control form-control-sm" value="{ $_user.phone }" /></td>
+    </tr>
+    <tr>
+        <th>电子邮箱：</th>
+        <td><input type="text" name="email" class="form-control form-control-sm" value="{ $_user.email }" /></td>
+    </tr>
+    <tr>
+        <th>微信号：</th>
+        <td><input type="text" name="weixin" class="form-control form-control-sm" value="{ $_user.weixin }" /></td>
+    </tr>
+    <tr>
+        <th>备注：</th>
+        <td><textarea name="memo" class="form-control form-control-sm">{ $_user.memo }</textarea></td>
+    </tr>
+    <tr>
+        <th></th>
+        <td>
+            <div class="form-error"></div>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+<script>
+$(function(){
+    $('#frmItem').submit(function(){
+        Z.ajaxSubmit(this, function(){
+            Z.alertMsg('信息修改成功');
+        });
+        return false;
+    });
+});
+</script>
+
+{ include '../main_bottom.html' }

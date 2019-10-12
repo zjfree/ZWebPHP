@@ -1,0 +1,1512 @@
+{
+    "build_time": "2019-10-11 16:13:59",
+    "class_list": [
+        {
+            "code": "Client",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Client.php",
+            "need_login": true,
+            "doc": {
+                "name": "客户维护",
+                "memo": "客户维护管理操作类",
+                "author": "zjfree",
+                "date": "2019-03-12"
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "列表页",
+                        "memo": "列表查询页",
+                        "author": "zjfree",
+                        "date": "2019-03-12",
+                        "return": "客户列表"
+                    },
+                    "params": [
+                        {
+                            "code": "client_type",
+                            "name": "客户类型",
+                            "type": "int",
+                            "require": false,
+                            "value": "0",
+                            "memo": ""
+                        },
+                        {
+                            "code": "query",
+                            "name": "查询关键词",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "sort",
+                            "name": "排序",
+                            "type": "int",
+                            "require": false,
+                            "value": "0",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "add",
+                    "doc": {
+                        "name": "添加页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "edit",
+                    "doc": {
+                        "name": "编辑页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "client"
+                        }
+                    ]
+                },
+                {
+                    "code": "save",
+                    "doc": {
+                        "name": "保存",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": false,
+                            "value": "0",
+                            "memo": "client"
+                        },
+                        {
+                            "code": "name",
+                            "name": "名称",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "status",
+                            "name": "状态",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "client_type",
+                            "name": "客户类型",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "ext",
+                            "name": "扩展属性",
+                            "type": "array",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "memo",
+                            "name": "备注",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "update_status",
+                    "doc": {
+                        "name": "状态更新",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "client"
+                        },
+                        {
+                            "code": "status",
+                            "name": "状态",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "delete",
+                    "doc": {
+                        "name": "删除",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "client"
+                        }
+                    ]
+                },
+                {
+                    "code": "upload_img",
+                    "doc": {
+                        "name": "上传图片",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "client"
+                        },
+                        {
+                            "code": "img_url",
+                            "name": "图片网址",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "Doc",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Doc.php",
+            "need_login": true,
+            "doc": {
+                "name": "文档中心",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "首页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "LocalService",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/LocalService.php",
+            "need_login": false,
+            "doc": {
+                "name": "本地服务",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "test",
+                    "doc": {
+                        "name": "测试",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "My",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/My.php",
+            "need_login": true,
+            "doc": {
+                "name": "当前用户",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "系统首页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "passwd",
+                    "doc": {
+                        "name": "修改密码页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "passwd_save",
+                    "doc": {
+                        "name": "修改密码保存",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "old_passwd",
+                            "name": "原密码",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "new_passwd1",
+                            "name": "新密码",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "new_passwd2",
+                            "name": "确认密码",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "edit",
+                    "doc": {
+                        "name": "编辑页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "save",
+                    "doc": {
+                        "name": "保存",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "name",
+                            "name": "",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "phone",
+                            "name": "",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "email",
+                            "name": "",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "weixin",
+                            "name": "",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "memo",
+                            "name": "",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "save_memo",
+                    "doc": {
+                        "name": "保存备忘信息",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "memo",
+                            "name": "备忘信息",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "Service",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Service.php",
+            "need_login": false,
+            "doc": {
+                "name": "服务",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "client_upload_cam",
+                    "doc": {
+                        "name": "客户手机拍照上传",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "client"
+                        },
+                        {
+                            "code": "img_url",
+                            "name": "图片网址",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "Sys",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Sys.php",
+            "need_login": true,
+            "doc": {
+                "name": "系统",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "系统首页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "phone_index",
+                    "doc": {
+                        "name": "手机首页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "about",
+                    "doc": {
+                        "name": "关于我们",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "help",
+                    "doc": {
+                        "name": "系统帮助",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "SysBase",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/SysBase.php",
+            "need_login": true,
+            "doc": {
+                "name": "系统基础",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "debug",
+                    "doc": {
+                        "name": "调试页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "debug_info",
+                    "doc": {
+                        "name": "调试信息显示",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "md5",
+                            "name": "",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "debug_info_clear",
+                    "doc": {
+                        "name": "调试信息清空",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "phpinfo",
+                    "doc": {
+                        "name": "php调试信息",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "file_log_clear",
+                    "doc": {
+                        "name": "清空文件日志",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "user_log_clear",
+                    "doc": {
+                        "name": "清空用户操作日志",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "upload_clear",
+                    "doc": {
+                        "name": "清空上传文件",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "db_query",
+                    "doc": {
+                        "name": "数据库查询",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "sql",
+                            "name": "",
+                            "type": "string",
+                            "require": false,
+                            "value": "SHOW TABLE STATUS",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "err",
+                    "doc": {
+                        "name": "系统错误测试页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "log",
+                    "doc": {
+                        "name": "系统操作日志",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "dt",
+                            "name": "查询日期",
+                            "type": "date",
+                            "require": false,
+                            "value": "today",
+                            "memo": ""
+                        },
+                        {
+                            "code": "page",
+                            "name": "分页",
+                            "type": "int",
+                            "require": false,
+                            "value": "1",
+                            "memo": ""
+                        },
+                        {
+                            "code": "page_size",
+                            "name": "单页数量",
+                            "type": "int",
+                            "require": false,
+                            "value": "30",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "login_log",
+                    "doc": {
+                        "name": "用户登录日志",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "dt",
+                            "name": "查询日期",
+                            "type": "date",
+                            "require": false,
+                            "value": "today",
+                            "memo": ""
+                        },
+                        {
+                            "code": "page",
+                            "name": "分页",
+                            "type": "int",
+                            "require": false,
+                            "value": "1",
+                            "memo": ""
+                        },
+                        {
+                            "code": "page_size",
+                            "name": "单页数量",
+                            "type": "int",
+                            "require": false,
+                            "value": "30",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "update_text",
+                    "doc": {
+                        "name": "更新文本字段",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "table",
+                            "name": "表名",
+                            "type": "code",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "field",
+                            "name": "字段名",
+                            "type": "code",
+                            "require": false,
+                            "value": "name",
+                            "memo": ""
+                        },
+                        {
+                            "code": "val",
+                            "name": "更新值",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "SysSetting",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/SysSetting.php",
+            "need_login": true,
+            "doc": {
+                "name": "系统配置",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "基础配置",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "save",
+                    "doc": {
+                        "name": "基础配置",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "type",
+                            "name": "类型标识",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "arr",
+                            "name": "数据项",
+                            "type": "any",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "Ui",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Ui.php",
+            "need_login": true,
+            "doc": {
+                "name": "UI类",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "首页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "tmp",
+                    "doc": {
+                        "name": "未整理",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "base",
+                    "doc": {
+                        "name": "基础样式",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "db",
+                    "doc": {
+                        "name": "数据库操作",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "tool",
+                    "doc": {
+                        "name": "工具类",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "api",
+                    "doc": {
+                        "name": "API文档",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "chart_js",
+                    "doc": {
+                        "name": "chart.js",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "echart",
+                    "doc": {
+                        "name": "echart",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "table1",
+                    "doc": {
+                        "name": "table1",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "page",
+                            "name": "第几页",
+                            "type": "int",
+                            "require": false,
+                            "value": "1",
+                            "memo": ""
+                        },
+                        {
+                            "code": "user_type",
+                            "name": "用户类型",
+                            "type": "int",
+                            "require": false,
+                            "value": "0",
+                            "memo": ""
+                        },
+                        {
+                            "code": "dt",
+                            "name": "日期",
+                            "type": "date",
+                            "require": false,
+                            "value": "today",
+                            "memo": ""
+                        },
+                        {
+                            "code": "dt_begin",
+                            "name": "",
+                            "type": "date",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "dt_end",
+                            "name": "",
+                            "type": "date",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "table2",
+                    "doc": {
+                        "name": "table2",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "table3",
+                    "doc": {
+                        "name": "table3",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "form1",
+                    "doc": {
+                        "name": "form1",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "form2",
+                    "doc": {
+                        "name": "form2",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "form3",
+                    "doc": {
+                        "name": "form3",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "form4",
+                    "doc": {
+                        "name": "form4",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "form_frame",
+                    "doc": {
+                        "name": "frame_form",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "page_empty",
+                    "doc": {
+                        "name": "page_empty",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "page_login",
+                    "doc": {
+                        "name": "page_login",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "page_register",
+                    "doc": {
+                        "name": "page_register",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "User",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/User.php",
+            "need_login": false,
+            "doc": {
+                "name": "用户",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "login",
+                    "doc": {
+                        "name": "登录",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "account",
+                            "name": "账号",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "passwd",
+                            "name": "密码",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "logout",
+                    "doc": {
+                        "name": "退出",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "register",
+                    "doc": {
+                        "name": "注册",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "UserManage",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/UserManage.php",
+            "need_login": true,
+            "doc": {
+                "name": "用户管理",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "列表页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "user_type",
+                            "name": "用户类型",
+                            "type": "int",
+                            "require": false,
+                            "value": "0",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "add",
+                    "doc": {
+                        "name": "添加页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "user_type",
+                            "name": "用户类型",
+                            "type": "int",
+                            "require": false,
+                            "value": "0",
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "edit",
+                    "doc": {
+                        "name": "编辑页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "user"
+                        }
+                    ]
+                },
+                {
+                    "code": "save",
+                    "doc": {
+                        "name": "保存",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": false,
+                            "value": "0",
+                            "memo": "user"
+                        },
+                        {
+                            "code": "user_type_id",
+                            "name": "用户类型ID",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "name",
+                            "name": "名称",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "account",
+                            "name": "账户",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "passwd",
+                            "name": "密码",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": "当添加时必填"
+                        },
+                        {
+                            "code": "phone",
+                            "name": "手机号",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "email",
+                            "name": "电子邮箱",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "weixin",
+                            "name": "微信",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "status",
+                            "name": "状态",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "memo",
+                            "name": "备注",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "update_status",
+                    "doc": {
+                        "name": "状态更新",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "user"
+                        },
+                        {
+                            "code": "status",
+                            "name": "状态",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "delete",
+                    "doc": {
+                        "name": "删除",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "user"
+                        }
+                    ]
+                },
+                {
+                    "code": "reload",
+                    "doc": {
+                        "name": "重新加载",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                }
+            ]
+        },
+        {
+            "code": "UserType",
+            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/UserType.php",
+            "need_login": true,
+            "doc": {
+                "name": "用户类型管理",
+                "memo": "",
+                "author": "",
+                "date": ""
+            },
+            "fn_list": [
+                {
+                    "code": "index",
+                    "doc": {
+                        "name": "列表页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "add",
+                    "doc": {
+                        "name": "添加页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": []
+                },
+                {
+                    "code": "edit",
+                    "doc": {
+                        "name": "编辑页",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "user_type"
+                        }
+                    ]
+                },
+                {
+                    "code": "save",
+                    "doc": {
+                        "name": "保存",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": false,
+                            "value": "0",
+                            "memo": "user_type"
+                        },
+                        {
+                            "code": "code",
+                            "name": "编号",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "name",
+                            "name": "名称",
+                            "type": "string",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "is_hide",
+                            "name": "是否隐藏",
+                            "type": "int",
+                            "require": true,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "power",
+                            "name": "权限",
+                            "type": "array",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "menu",
+                            "name": "菜单",
+                            "type": "array",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "memo",
+                            "name": "备注",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
+                },
+                {
+                    "code": "delete",
+                    "doc": {
+                        "name": "删除",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "id",
+                            "name": "ID编号",
+                            "type": "id",
+                            "require": true,
+                            "value": null,
+                            "memo": "user_type"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

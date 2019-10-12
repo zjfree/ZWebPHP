@@ -1,0 +1,50 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_ui_form_form3';
+</script>
+
+<form class="z-form ajax-submit" method="POST" action="./tool/ajax.php">
+    <!--
+    <input type="text" autocomplete="OFF" autofocus required readonly placeholder="hello" pattern="[A-z]{3}" />
+    -->
+    <input type="hidden" name="id" value="123" />
+    <h3>基础信息</h3>
+    <div class="form-item">
+        <label>日期范围：</label>
+        <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+        </div>
+        <input type="date" class="form-control" name="dt_begin" value="2018-09-01">
+        <div class="input-group-append">
+            <span class="input-group-text">至</span>
+        </div>
+        <input type="date" class="form-control input-group-append" name="dt_end" value="2018-10-01">
+        </div>
+    </div>
+    <div class="form-item">
+        <label>数字范围：</label>
+        <div class="input-group input-group-sm">
+        <input type="number" class="form-control" name="num_begin" value="200">
+        <div class="input-group-append">
+            <span class="input-group-text">至</span>
+        </div>
+        <input type="number" class="form-control input-group-append" name="num_end" value="300">
+        <div class="input-group-append">
+            <span class="input-group-text">个</span>
+        </div>
+        </div>
+    </div>
+    <div class="form-item-full">
+        <label>备注：</label>
+        <div><textarea class="form-control form-control-sm"></textarea></div>
+    </div>
+    <div class="form-error"></div>
+    <footer>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        <a class="btn btn-secondary" href="/">取消</a>
+    </footer>
+</form>
+
+{ include '../main_bottom.html' }

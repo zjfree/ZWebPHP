@@ -1,0 +1,8 @@
+2019-10-09 10:28:10 Exception: 系统错误测试 in D:\WORK\ZWebPHP\WEB\app\api\SysBase.php:178
+Stack trace:
+#0 [internal function]: app\api\SysBase::err(Array)
+#1 D:\WORK\ZWebPHP\WEB\zphp\Sys.php(337): call_user_func(Array, Array)
+#2 D:\WORK\ZWebPHP\WEB\zphp\Sys.php(47): zphp\Sys::callApi('sys_base::err', Array)
+#3 D:\WORK\ZWebPHP\WEB\index.php(16): zphp\Sys::start()
+#4 {main}
+

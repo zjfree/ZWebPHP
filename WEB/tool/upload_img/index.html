@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=0.7, maximum-scale=1.0, minimum-scale=0.5">
+<title>图片上传</title>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery.Jcrop.js"></script>
+<script type="text/javascript">
+
+// 网络测试图片 http://img4.imgtn.bdimg.com/it/u=4118960086,2125569760&fm=26&gp=0.jpg
+var jcrop_api;
+var realHeight = 0, realWidth = 0;
+
+$(function(){
+    window.onerror=function(msg,url,l)
+    {
+        txt="Error: " + msg + "\n"
+        txt+="URL: " + url + "\n"
+        txt+="Line: " + l + "\n"
+        alert(txt)
+        return true
+    }
+    initImg();
+    initJcrop();
+    initCanvas();
+});
+
+function initImg()
+{
+    var image = document.getElementById('target');
+    image.style = 'width:100%;';
+    image.onload=function(){//图片加载是一个异步的过程
+        //获取图片文件真实宽度和大小
+        var img = new Image();
+        img.onload=function(){
+            realWidth = img.width;
+            realHeight = img.height;
+            
+            //获取图片真实高度之后
+            initJcrop();//初始化Jcrop插件
+            initCanvas();//初始化Canvas内容
+        };
+        img.src = image.src;
+    };
+}
+
+// The function is pretty simple
+function initJcrop()//{{{
+{
+    if (jcrop_api)
+    {
+        jcrop_api.destroy();
+    }
+    // Invoke Jcrop in typical fashion
+    $('#target').Jcrop({
+        allowSelect:false,
+        aspectRatio: $('#myCanvas').width()/$('#myCanvas').height(),
+        onChange:   showCoords,
+        onSelect:   showCoords,
+    },function(){
+
+        jcrop_api = this;
+
+        // 重新最大化选中
+        var w = $('#target').width();
+        var h = $('#target').height();
+        if (w / h < $('#myCanvas').width() / $('#myCanvas').height())
+        {
+            jcrop_api.setSelect([0,0,600,450]);
+        }
+        else
+        {
+            jcrop_api.setSelect([0,0, h * 4 / 3, w]);
+        }
+    });
+};
+
+// 选择网络图片
+function openUrl()
+{
+    var imgUrl = window.prompt('请输入网络图片的URL地址：');
+        console.log(imgUrl);
+        if (imgUrl)
+        {
+            $('#target').attr('src', imgUrl);
+            $('#target')[0].setAttribute("crossOrigin",'Anonymous')
+            $('#target')[0].style = 'width:100%;';
+            initJcrop();
+        }
+}
+
+// 手机拍摄
+function openCam()
+{
+    var a=document.createEvent("MouseEvents");
+    a.initEvent("click", true, true);  
+    document.getElementById("fileCam").dispatchEvent(a);
+}
+
+function changeCamFile() 
+{
+    var url = getFileUrl("fileCam");//根据id获取文件路径
+    preImg(url);
+    return false;
+}
+
+//1、打开浏览器
+function openBrowse()
+{
+    var ie=navigator.appName=="Microsoft Internet Explorer" ? true : false; 
+    if(ie){ 
+        document.getElementById("file").click(); 
+    }else{
+        var a=document.createEvent("MouseEvents");
+        a.initEvent("click", true, true);  
+        document.getElementById("file").dispatchEvent(a);
+    } 
+}
+
+//2、从 file 域获取 本地图片 url 
+function getFileUrl(sourceId)
+{ 
+    var url; 
+    if (navigator.userAgent.indexOf("MSIE")>=1) { // IE 
+    url = document.getElementById(sourceId).value; 
+    } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox 
+    url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0)); 
+    } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome 
+    url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0)); 
+    } else if(navigator.userAgent.indexOf("Safari")>0) { // Chrome 
+    url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0)); 
+    } 
+    return url; 
+} 
+//选择文件事件
+function changeFile() 
+{
+    var url = getFileUrl("file");//根据id获取文件路径
+    preImg(url);
+    return false;
+}
+
+//3、将本地图片 显示到浏览器上 
+function preImg(url) { 
+
+    console.log('imgUrl:' + url);
+
+    //初始化图片
+    var image = document.getElementById('target');
+    image.style = 'width:100%;';
+    image.src = url;
+} 
+
+//初始化canvas画板内容
+function initCanvas()
+{
+    //更新canvas画板内容
+    var img = document.getElementById("target");
+    var ct = document.getElementById("myCanvas");
+    var ctx = ct.getContext("2d");
+    
+    var myCanWidth = $('#myCanvas').width();
+    var myCanHeight = $('#myCanvas').height();
+
+    //清空画板
+    ctx.clearRect(0,0, ct.width, ct.height); 
+
+    if (realWidth == 0)
+	{
+		return;
+	}
+
+    // console.log(realWidth, realHeight);
+    ctx.drawImage(img, 0,0, realWidth, realHeight, 0, 0, myCanWidth, myCanHeight);
+}
+
+// 裁剪图片
+function showCoords(c)
+{
+    if (realWidth == 0)
+	{
+		return;
+	}
+
+    // console.log(c);
+
+    //更新canvas画板内容
+    var img = document.getElementById("target");
+    var ct = document.getElementById("myCanvas");
+    var ctx = ct.getContext("2d");
+    
+    var myCanWidth = $('#myCanvas').width();
+    var myCanHeight = $('#myCanvas').height();
+
+    var rate = realWidth / $('#target').width();
+    
+    //清空画板
+    ctx.clearRect(0,0, ct.width, ct.height); 
+
+    // console.log(realWidth, realHeight);
+    ctx.drawImage(img, c.x * rate, c.y * rate, c.w * rate, c.h * rate, 0, 0, myCanWidth, myCanHeight);
+}
+
+//文件上传
+function uploadFile()
+{
+    //获取裁剪完后的base64图片url,转换为blob
+    var data=document.getElementById("myCanvas").toDataURL("image/jpeg", 0.8);
+    var formData=new FormData();
+    formData.append("img_file",dataURLtoBlob(data));
+    var httprequest= null;
+    if (window.XMLHttpRequest) {
+        httprequest = new XMLHttpRequest();
+    } else {
+        httprequest = new ActiveXObject('MicroSoft.XMLHTTP');
+    }
+    var apiurl= "/tool/upload_img/save.php"; //上传图片的api接口，自行填写
+    httprequest.open('POST',apiurl,true);
+    httprequest.send(formData);
+    httprequest.onreadystatechange= function ()
+    {
+        if (httprequest.readyState == 4){
+            if(httprequest.status == 200)
+            {
+                var json = JSON.parse(httprequest.responseText);
+                if (json.result != 1)
+                {
+                    alert(json.error);
+                }
+                else
+                {
+                    uploadSuccess(json.img_url);
+                }
+            }
+            else
+            {
+                alert('获取数据错误,错误代码：' + httprequest.status + '错误信息：' + httprequest.statusText);
+            }
+        }
+    };
+}
+
+//把base64位的toDataURL图片转换成blob
+function dataURLtoBlob(dataurl)
+{  
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],  
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);  
+    while (n--) {  
+        u8arr[n] = bstr.charCodeAt(n);  
+    }  
+    return new Blob([u8arr], { type: mime });  
+} 
+
+// 上传成功
+function uploadSuccess(img_url)
+{
+    var url = getParam('url');
+    if (window.top != window)
+    {
+        top.uploadImgCallback(img_url);
+    }
+    else if (url)
+    {
+        window.location.href = url + '&img_url=' + img_url;
+    }
+    else
+    {
+        alert('图片上传成功:' + img_url);
+    }
+}
+
+// 获取GET参数
+function getParam(par)
+{
+    //获取当前URL
+    var local_url = document.location.href; 
+    //获取要取得的get参数位置
+    var get = local_url.indexOf(par +"=");
+    if(get == -1){
+        return false;   
+    }   
+    //截取字符串
+    var get_par = local_url.slice(par.length + get + 1);    
+    //判断截取后的字符串是否还有其他get参数
+    var nextPar = get_par.indexOf("&");
+    if(nextPar != -1){
+        get_par = get_par.slice(0, nextPar);
+    }
+    return decodeURIComponent(get_par);
+}
+
+</script>
+<link rel="stylesheet" href="./css/jquery.Jcrop.css" type="text/css" />
+<style type="text/css">
+html, body{
+    margin:0;
+    padding:0;
+}
+body{
+    margin:10px;
+    overflow-y:scroll;
+}
+</style>
+
+</head>
+<body>
+<input type="file" id="file" onchange="changeFile()" style="display: none;"/>
+<input type="file" id="fileCam" accept="image/*" capture="camera" onchange="changeCamFile()" style="display: none;"/>
+<div style="width:100%;">
+    <button class="btn" onclick="openBrowse();">本地图片</button>
+    <button class="btn" onclick="openUrl();">网络图片</button>
+    <button class="btn" onclick="openCam();">手机拍摄</button>
+	&emsp;
+    <button id="btnSave" class="btn btn-primary" onclick="uploadFile();">上传图片</button>
+</div>
+<div style="width: 600px; margin-top:10px;">
+    <img src="upload.jpg" style="width:100%;" id="target" alt="[Jcrop Example]" />
+</div>
+
+<!-- 画板 -->
+<canvas id="myCanvas" width="600" height="450" style="display:none;"></canvas>
+
+</body>
+</html>
+

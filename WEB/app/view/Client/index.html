@@ -1,0 +1,136 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_client';
+</script>
+<h3 class="page-header"><i class="fa fa-vcard"></i> 客户管理</h3>
+
+<!--表格顶部工具栏-->
+<form class="form-query form-inline">
+    <input type="hidden" name="_" value="{ $_api.base }" />
+    客户类型：
+    <select class="form-control form-control-sm auto-submit" name="client_type" data-select-val="{ $client_type }">
+        <option value="0">全部</option>
+        { foreach $client_type_list as $r }
+        <option value="{ $r.id }">{ $r.name }</option>
+        { /foreach }
+    </select>
+    { if V::hasPower('Client.add') }
+    &nbsp;
+    <button class="btn btn-primary btn-sm" onclick="Z.alertFrame('index.php?_=client::add', '添加客户', ['600px', '710px']); return false;">
+        <i class="fa fa-plus-circle"></i> 添加
+    </button>
+    { /if }
+
+    <!--表格工具-->
+    <div class="table-tool btn-toolbar">
+        <div class="nav-item input-group mr-1">
+            <input type="search" class="form-control form-control-sm" autofocus autocomplete="OFF" placeholder="Search" name="query" value="{ $query }">
+            <div class="input-group-append">
+                <button class="btn btn-sm btn-secondary" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div class="btn-group btn-group-sm" role="group">
+            <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="刷新数据"><i class="fa fa-refresh"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="表格打印" onclick="$('#tbList').printThis()"><i class="fa fa-print"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="导出EXCEL" onclick="Z.tableToExcel('tbList')"><i class="fa fa-external-link"></i></button>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right z-tb-sort" data-sort-val="{ $sort }">
+                    { foreach $sort_list as $k => $r }
+                    <a data-val="{ $k }" class="dropdown-item" href="#"><i class="fa"></i> { $r.name } <i class="fa fa-long-arrow-{ $r.icon }"></i></a>
+                    { /foreach }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="tbListDiv">
+<table id="tbList" class="tbList fix-header" data-table="{ 'client'|z_code }">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>编号</th>
+        <th>类型</th>
+        <th>名称</th>
+        <th>公司全称</th>
+        <th>图片</th>
+        <th>状态</th>
+        <th>备注</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        { foreach $list as $r }
+        <tr data-id="{ $r.id|z_id:'client' }">
+        <td>{ $r.id }</td>
+        <td>{ $r.code }</td>
+        <td>{ $r.client_type|z_enum_format:'client_type' }</td>
+        { if $r.ext.url }
+        <td><a target="_blank" href="{ $r.ext.url }">{ $r.name }</a></td>
+        { else }
+        <td>{ $r.name }</td>
+        { /if }
+        <td>{ $r.ext.company }</td>
+        { if $r.img_url == '' }
+        <td></td>
+        { else }
+        <td class="img_hover" data-img="{ $r.img_url }"><i class="fa fa-image"></i></td>
+        { /if }
+        { if V::hasPower('Client.update_status') }
+        { $r.status|z_td_status:'index.php?_=client::update_status' }
+        { else }
+        <td>{ $r.status|z_enum_format:'status' }</td>
+        { /if }
+        <td>{ $r.memo }</td>
+        <td>{ $r.add_time }</td>
+        <td class="td-btn">
+            { if V::hasPower('Client.edit') }
+            { z_btn_frame_edit url='index.php?_=client::edit' title="编辑客户" size="600px, 710px" }
+            { /if }
+            { if V::hasPower('Client.delete') }
+            { z_btn_del url='index.php?_=client::delete' }
+            { /if }
+            { if V::hasPower('Client.upload_img') }
+            <a href="javascript:uploadImg('{ $r.id|z_id:'client' }');"><i class="fa fa-image"></i> 上传</a>
+            <a href="javascript:uploadImgCam('{ $r.id|z_id:'client' }');"><i class="fa fa-qrcode"></i> 拍照</a>
+            { /if }
+        </td>
+        </tr>
+        { /foreach }
+    </tbody>
+</table>
+</div>
+
+{ if V::hasPower('Client.upload_img') }
+<script>
+var curId = null;
+function uploadImg(id)
+{
+    curId = id;
+    Z.alertFrame('/tool/upload_img/index.html', '图片上传', ['650px', '600px']);
+}
+
+function uploadImgCam(id)
+{
+    Z.alertFrame('/tool/upload_img/qrcode.html?url={ '/index.php?_=service::client_upload_cam&id='|urlencode }' + id, '手机拍照', ['450px', '500px']);
+}
+
+function uploadImgCallback(img_url)
+{
+    Z.ajax({
+        url:'index.php?_=client::upload_img',
+        data:{
+            id:curId,
+            img_url:img_url,
+        }
+    });
+}
+</script>
+{ /if }
+
+{ include '../main_bottom.html' }

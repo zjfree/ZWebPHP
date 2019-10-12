@@ -1,0 +1,62 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_debug';
+</script>
+
+<h3 class="page-header"><i class="fa fa-bug"></i> 调试信息查询</h3>
+
+<div class="mb-2">
+    <button type="submit" class="btn btn-sm btn-primary" onclick="loadData();"><i class="fa fa-refresh"></i> 刷新</button>
+    <button  class="btn btn-sm btn-danger" onclick="clearData();"><i class="fa fa-trash"></i> 清空</button>
+    &nbsp;
+    <span id="spanNow">{ $now }</span>
+</div>
+
+<style>
+#preContent{
+    border:solid 1px gray;
+    margin:0;
+    padding:10px;
+    font-size:12px;
+}
+</style>
+
+<pre id="preContent">{ $content }</pre>
+
+<script>
+var md5 = '{md5}';
+function clearData()
+{
+    Z.ajax({
+        url:'index.php?_=sys_base::debug_info_clear',
+        success:function(res){
+            window.location.reload();
+        },
+    });
+}
+
+function loadData()
+{
+    Z.ajax({
+        url:'index.php?_=sys_base::debug_info',
+        data:{md5:md5},
+        success:function(res){
+            md5 = res.data.md5;
+            $('#spanNow').html(res.data.now);
+            if (res.data.content != '')
+            {
+                $('#preContent').html(res.data.content).scrollTop($('#preContent').height());
+            }
+        },
+    });
+}
+
+$(function(){
+    $('#preContent').css('height', ($(window).height() - $('#preContent').offset().top - 20) + 'px');$('div');
+    $('#preContent').scrollTop($('#preContent').height());
+});
+
+</script>
+
+{ include '../main_bottom.html' }

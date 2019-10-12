@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>{ $title|default:$_sys.sys_name }</title>
+
+    <link href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/jsbarcode/3.11.0/JsBarcode.all.min.js"></script>
+
+<style>
+body, html{padding:0px; margin:0px; height:100%; overflow-x:hidden;}
+body {
+    background-size: 100% 100%;
+    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAADCAYAAABfwxXFAAAAYklEQVQIWwFXAKj/ARBhmP8R6wMAHhsgABLvBAByKg0AterTAP7W8wABGnGg/1InOABMECEAy4vRAEcMAADE98oA4PjqAAEgYIL/MDs3AEcGLADxieMAQhUWAO/xzwCh778ANjsgSPo2oIsAAAAASUVORK5CYII=");
+    line-height: 1.5;
+    font-family: 微软雅黑;
+    overflow-y:scroll;
+}
+.print-main{
+    width:950px; 
+    margin:0 auto;
+    position: relative; 
+    background:#fff;
+    margin:20px auto;
+    box-shadow: 0 10px 100px black;
+    margin-top:50px;
+    padding-bottom:10px;
+}
+.print-close{
+    position:absolute; top:-40px; right:15px;
+}
+.print-btn{
+    position:absolute; top:-40px; left:15px;
+}
+
+#barcode, .barcode{
+    position:absolute; top:10px; right:20px;
+}
+
+table.tb {
+    font-family: verdana,arial,sans-serif;
+    font-size:14px;
+    color:#333333;
+    border-collapse: collapse;
+    border: solid 2px #666666;
+    width:100%;
+}
+table.tb th {
+    border: solid 1px #666666;
+    padding: 3px 5px;
+    background-color: #dedede;
+    text-align: right;
+}
+table.tb td {
+    border: solid 1px #666666;
+    padding: 3px 5px;
+    background-color: #ffffff;
+    text-align:left;
+}
+
+.btn{
+    padding:5px 10px;
+    background: #ddd;
+    color:#000;
+    border:solid 1px #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn:hover{
+    background: #eee;
+}
+a.btn{
+    text-decoration: none;
+    font-size:14px;
+}
+
+.print-page {
+    page-break-before: auto;        
+    page-break-after: always;
+}
+.print-over{
+    word-break:break-all ;
+    word-wrap:break-word;
+}
+
+@media print{
+    body, html{height:auto;overflow-x:auto;overflow-y:auto; margin:0; padding:0;}
+    .print-main {
+        box-shadow:none;
+        margin:0 auto;
+        padding:0;
+        margin-top:0;
+        width:900px; 
+    }
+    .print-hide{
+        display: none;
+    }
+    .print-over{
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+
+}
+</style>
+</head>
+<body>

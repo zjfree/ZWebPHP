@@ -1,0 +1,45 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_index';
+    Z.config.navBreadcrumb = '当前用户信息';
+</script>
+
+<h3 class="page-header"><i class="fa fa-user-circle"></i> { $_user.name } ({ $_user.account })</h3>
+
+<nav>
+<div class="nav nav-tabs">
+<a class="nav-item nav-link" href="/index.php?_=my">用户信息</a>
+<a class="nav-item nav-link active" href="#">修改密码</a>
+<a class="nav-item nav-link" href="/index.php?_=my::edit">编辑信息</a>
+</div>
+</nav>
+
+<form id="frmItem" method="POST" action="/index.php?_=my::passwd_save">
+<table class="tb-form mt-3">
+    <tr><th>原密码：</th><td><input type="password" required autofocus name="old_passwd" class="form-control form-control-sm" /></td></tr>
+    <tr><th>新密码：</th><td><input type="password" required name="new_passwd1" class="form-control form-control-sm" /></td></tr>
+    <tr><th>确认密码：</th><td><input type="password" required name="new_passwd2" class="form-control form-control-sm" /></td></tr>
+    <tr>
+        <th></th>
+        <td>
+            <div class="form-error"></div>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 修改密码</button>
+        </td>
+    </tr>
+</table>
+</form>
+
+<script>
+$(function(){
+    $('#frmItem').submit(function(){
+        Z.ajaxSubmit(this, function(){
+            $('#frmItem input').val('');
+            Z.alertMsg('密码修改成功');
+        });
+        return false;
+    });
+});
+</script>
+
+{ include '../main_bottom.html' }

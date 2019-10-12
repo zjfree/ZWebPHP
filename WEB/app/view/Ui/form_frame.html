@@ -1,0 +1,106 @@
+{ include '../page_top.html' }
+
+<form class="z-form form-frame ajax-submit" method="POST" action="./tool/ajax.php">
+    <!--
+    <input type="text" autocomplete="OFF" autofocus required readonly placeholder="hello" pattern="[A-z]{3}" />
+    -->
+    <input type="hidden" name="id" value="123" />
+    <h3>基础信息</h3>
+    <div class="form-item">
+        <label>名称：</label>
+        <input class="form-control form-control-sm" type="text" name="name" autofocus required maxlength="30" />
+    </div>
+    <div class="form-item">
+        <label>账号：</label>
+        <input class="form-control form-control-sm" type="text" name="account" required maxlength="30" />
+    </div>
+    <div class="form-item">
+        <label>密码：</label>
+        <input class="form-control form-control-sm" type="password" name="password" required data-toggle="tooltip" title="密码必须填写，至少6位" />
+    </div>
+    <div class="form-br10"></div>
+    <h3>身份信息</h3>
+    <div class="form-item">
+        <label>年龄：</label>
+        <input class="form-control form-control-sm" type="number" name="age" min="1" max="100" value="25" />
+    </div>
+    <div class="form-item">
+        <label>籍贯：</label>
+        <input class="form-control form-control-sm" type="text" name="place" data-combox="BMW::hello,Ford,Volvo" />
+    </div>
+    <div class="form-item-full">
+        <label>家庭住址：</label>
+        <input class="form-control form-control-sm" type="text" name="address" placeholder="XXX省 XXX市 XXX小区 XXXXXX" />
+        <small>注意：填写说明！具体到房子。</small>
+    </div>
+    <div class="form-item">
+        <label>生日：</label>
+        <input class="form-control form-control-sm" type="date" name="birthday" />
+    </div>
+    <div class="form-item">
+        <label>学历：</label>
+        <select class="form-control form-control-sm" data-select-val="7">
+        <option value="1">无</option>
+        <option value="2">小学</option>
+        <option value="3">初中</option>
+        <option value="4">高中</option>
+        <option value="5">中专</option>
+        <option value="6">大专</option>
+        <option value="7">本科</option>
+        <option value="8">研究生</option>
+        <option value="9">博士</option>
+        <option value="10">硕士</option>
+        </select>
+    </div>
+    <div class="form-item">
+        <label>月收入：</label>
+        <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+        </div>
+        <input type="number" class="form-control" value="3000" step="0.01" min="0">
+        <div class="input-group-append">
+            <span class="input-group-text">元</span>
+        </div>
+        </div>
+    </div>
+    <div class="form-item">
+        <label>身高范围：</label> <span id="range1_val">0</span> cm
+        <input id="range1" type="range" name="height" min="10" max="250" step="0.1" value="178" />
+    </div>
+    <div class="form-item">
+        <label>状态：</label>
+        <div class="checked-active" data-radio-val="1">
+            <label style="color:#33AA33;"><input type="radio" name="status" value="1" /> 启动</label>
+            <label style="color:red;"><input type="radio" name="status" value="0" /> 禁用</label>
+        </div>
+    </div>
+    <div class="form-item">
+        <label>性别：</label>
+        <div class="checked-active" data-radio-val="1">
+            <label><input type="radio" name="sex" value="1" /> 男</label>
+            <label><input type="radio" name="sex" value="2" /> 女</label>
+        </div>
+    </div>
+    <div class="form-item-full" style="height:auto;">
+        <label>爱好：</label>
+        <div class="checked-active" data-checkbox-val="2,3">
+            <label><input type="checkbox" name="chk[]" value="1" /> 健身</label>
+            <label><input type="checkbox" name="chk[]" value="2" /> 游泳</label>
+            <label><input type="checkbox" name="chk[]" value="3" /> 骑行</label>
+            <label><input type="checkbox" name="chk[]" value="4" /> 户外运动</label>
+            <label><input type="checkbox" name="chk[]" value="5" /> 足球</label>
+        </div>
+    </div>
+    <div class="form-item-full">
+        <label>备注：</label>
+        <div><textarea class="form-control form-control-sm"></textarea></div>
+    </div>
+    <div class="form-error"></div>
+    <footer>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        <button class="btn btn-secondary cancel">取消</button>
+    </footer>
+</form>
+
+{ include '../page_bottom.html' }

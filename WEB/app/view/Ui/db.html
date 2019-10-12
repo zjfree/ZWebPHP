@@ -1,0 +1,227 @@
+{ include '../main_top.html' }
+
+<script>
+Z.config.navMenuId = 'NavMenu_ui_db';
+</script>
+<link href="https://lib.baomitu.com/highlight.js/9.15.10/styles/default.min.css" rel="stylesheet">
+<script src="https://lib.baomitu.com/highlight.js/9.15.10/highlight.min.js"></script>
+
+<h3>数据库设计规范：</h3>
+<ul>
+<li>所有代码为 小写字母和数字和下划线  单词之间使用下划线分割</li>
+<li>短的文本都用 <code>varchar(255)</code> </li>
+<li>长文本使用 <code>varchar(2048)</code></li>
+<li>超长文本用 <code>longtext</code></li>
+<li>数字和状态使用 <code>int</code></li>
+<li>浮点数使用 <code>decimal(11,3)</code></li>
+<li>每张表必须包含自增ID主键字段。</li>
+<li>状态使用 <code>status int</code>，0 - 禁用 1 - 正常 2 - 已删除</li>
+<li>状态和整数都使用 <code></code>int</li>
+<li>所有字段都必须指定默认值（<code>longtext</code>除外）</li>
+<li>字符串默认为空，数字默认为<code>0</code>，日期默认为 <code>2000-01-01</code></li>
+<li><code>longtext</code>字段不要设置默认值</li>
+<li><code>JSON</code>字段使用<code>_json</code>结尾，类型使用 <code>longtext</code></li>
+</ul>
+
+<h3>执行原始SQL</h3>
+<pre><code class="php">
+$list = DB::runSql('SELECT * FROM client WHERE type = :type', ['type' => 1]);
+</code></pre>
+
+<h3>添加 insert</h3>
+<pre><code class="php">
+$id = DB::table('client') -> insert([
+    'code'        => Sys::getNo('client'),
+    'name'        => $params['name'],
+    'client_type' => $params['client_type'],
+    'memo'        => $params['memo'],
+    'status'      => $params['status'],
+    'config_json' => json_encode($params['ext']),
+    'add_time'    => '::now()',
+]);
+</code></pre>
+
+<h3>更新 update</h3>
+<pre><code class="php">
+DB::table('client') -> update([
+    'id'           => $params['id'],
+    'name'         => $params['name'],
+    'client_type'  => $params['client_type'],
+    'memo'         => $params['memo'],
+    'status'       => $params['status'],
+    'config_json'  => json_encode($ext),
+    'update_time'  => '::now()',
+]);
+
+DB::table('client') 
+    -> where('id', 123)
+    -> update('name', 'hello');
+</code></pre>
+
+<h3>删除 delete</h3>
+<pre><code class="php">
+DB::table('client') -> delete($id);
+DB::table('client') -> where('code', $code) -> delete();
+</code></pre>
+
+<h3>查询列表 select</h3>
+<pre><code class="php">
+DB::table('client') -> select();
+</code></pre>
+
+<h3>查询单条 find</h3>
+<pre><code class="php">
+DB::table('client') -> find($id);
+</code></pre>
+
+<h3>查询条件 where</h3>
+<pre><code class="php">
+// status = 1
+DB::table('client') -> where('status', 1) -> select();
+
+// status > 1
+DB::table('client') 
+    -> where('status', '>',  1) 
+    -> select();
+
+// status != 1 OR name = :name
+DB::table('client') 
+    -> where('status != 1') 
+    -> whereOr('name', $name) 
+    -> select();
+
+// 当 $type > 0 时 type = :type
+DB::table('client') 
+    -> whereIf($type > 0, 'type', $type) 
+    -> select();
+    
+// status IN [1,2] AND add_time BETWEEN :dt_begin AND :dt_end
+DB::table('client') 
+    -> where('status', 'in',  [1, 2]) 
+    -> where('add_time', 'between',  [$dt_begin, $dt_end]) 
+    -> select();
+
+</code></pre>
+
+<h3>复杂查询</h3>
+<pre><code class="php">
+$list = DB::table('client')
+    -> field('id, name, add_time')
+    -> where('type', 2)
+    -> order('id DESC')
+    -> limit(100)
+    -> json()
+    -> select();
+</code></pre>
+
+<h3>JOIN</h3>
+<pre><code class="php">
+$list = DB::table('client a')
+    -> field('a.*, b.account')
+    -> join('LEFT JOIN user b ON a.user_id = b.id')
+    -> where('a.type', 2)
+    -> select();
+</code></pre>
+
+<h3>GROUP</h3>
+<pre><code class="php">
+$list = DB::table('client')
+    -> field('type, COUNT(1) AS count, MAX(id) AS max_id')
+    -> where('status', 1)
+    -> group('type')
+    -> having('count')
+    -> select();
+</code></pre>
+
+<h3>切换数据库连接</h3>
+<pre><code class="php">
+// 注册新的数据库
+$db_config = [
+    'dsn'      => 'mysql:dbname=test;host=127.0.0.1;port=3306;charset=utf8',
+    'user'     => 'root',
+    'password' => '',
+    'overtime' => 1000,
+];
+DB::init($db_config, 'db1');
+$list = DB::table('client', 'db1')
+    -> where('status', 1)
+    -> select();
+</code></pre>
+
+<h3>获取SQL语句</h3>
+<pre><code class="php">
+$sql = DB::table('client')
+    -> where('status', 1)
+    -> buildSelectSql();
+</code></pre>
+
+<h3>批量添加</h3>
+<pre><code class="php">
+DB::table('client') -> insertAll([
+    ['name' => 'a1', 'add_time' => Tool::now()],
+    ['name' => 'a2', 'add_time' => Tool::now()],
+    ['name' => 'a3', 'add_time' => Tool::now()],
+    ['name' => 'a4', 'add_time' => Tool::now()],
+]);
+</code></pre>
+
+<h3>批量更新</h3>
+<pre><code class="php">
+// 必须包含ID列
+DB::table('client') -> updateAll([
+    ['id' => 1, 'name' => 'a1', 'add_time' => Tool::now()],
+    ['id' => 2, 'name' => 'a2', 'add_time' => Tool::now()],
+    ['id' => 3, 'name' => 'a3', 'add_time' => Tool::now()],
+    ['id' => 4, 'name' => 'a4', 'add_time' => Tool::now()],
+]);
+</code></pre>
+
+<h3>清空表</h3>
+<pre><code class="php">
+DB::table('client') -> truncate();
+</code></pre>
+
+<h3>获取数量</h3>
+<pre><code class="php">
+$count = DB::table('client') 
+    -> where('type', 1) 
+    -> count();
+</code></pre>
+
+<h3>创建新表</h3>
+<pre><code class="php">
+DB::table('client') -> createTable('client_01');
+</code></pre>
+
+<h3>分页查询</h3>
+<pre><code class="php">
+list($count, $list) = DB::table('client') -> selectPage($page, $page_size);
+</code></pre>
+
+<h3>分批获取数据</h3>
+<pre><code class="php">
+// 将大数据量分割，防止内存溢出
+DB::table('client') -> chunk(1000, function($list, $total_count, $index){
+    // 处理
+});
+</code></pre>
+
+<h3>获取指定值</h3>
+<pre><code class="php">
+// value(字段名, [默认值])
+$val = DB::table('client') -> where('id', 123) -> value('name', '');
+</code></pre>
+
+<h3>获取指定列</h3>
+<pre><code class="php">
+// 获取name列表
+$list = DB::table('client') -> column('name');
+// 获取以ID为索引的名称列表 [$id => $name]
+$list = DB::table('client') -> column('name', 'id');
+// 获取以ID为索引的对象列表 [$id => $item]
+$list = DB::table('client') -> column('*', 'id');
+</code></pre>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+{ include '../main_bottom.html' }

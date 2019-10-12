@@ -1,0 +1,95 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_user';
+</script>
+<h3 class="page-header"><i class="fa fa-users"></i> 用户管理</h3>
+
+<!--表格顶部工具栏-->
+<form id="frmQuery" class="form-query form-inline">
+    <input type="hidden" name="_" value="{ $_api.base }" />
+    用户类型：
+    <select class="form-control form-control-sm auto-submit" name="user_type" data-select-val="{ $user_type_id }">
+        <option value="0">全部</option>
+        { foreach $user_type_list as $r }
+        <option value="{ $r.id }">{ $r.name }</option>
+        { /foreach }
+    </select>
+    &nbsp;
+    <button class="btn btn-primary btn-sm" onclick="Z.alertFrame('index.php?_=user_manage::add&user_type={ $user_type_id }', '添加用户', ['600px', '580px']); return false;">
+        <i class="fa fa-plus-circle"></i> 添加
+    </button>
+    { if $_user.id == 1 }
+    &nbsp;
+    <button class="btn btn-danger btn-sm" onclick="Z.ajax({url:'index.php?_=user_manage::reload', success:function(){Z.alertMsg('重置登录用户成功', 6)}}); return false;">
+        <i class="fa fa-refresh"></i> 重置登录用户
+    </button>
+    { /if }
+
+    <!--表格工具-->
+    <div class="table-tool btn-toolbar">
+        <div class="btn-group btn-group-sm" role="group">
+            <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="刷新数据"><i class="fa fa-refresh"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="表格打印"><i class="fa fa-print"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="导出EXCEL"><i class="fa fa-external-link"></i></button>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item active" href="#"><i class="fa fa-check"></i> ID编号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-up"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="tbListDiv">
+<table class="tbList fix-header">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>用户类型</th>
+        <th>名称</th>
+        <th>账号</th>
+        <th>状态</th>
+        <th>手机号</th>
+        <th>电子邮箱</th>
+        <th>微信</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        { foreach $user_list as $r }
+        <tr data-id="{ $r.id|z_id:'user' }">
+        <td>{ $r.id }</td>
+        <td>{ $r.user_type_id|z_id_name:'user_type' }</td>
+        <td>{ $r.name }</td>
+        <td title="{ $r.guid }">{ $r.account }</td>
+        { if $r.id == 1 }
+        <td>启用</td>
+        { else }
+        { $r.status|z_td_status:'index.php?_=user_manage::update_status' }
+        { /if }
+        <td>{ $r.phone }</td>
+        <td>{ $r.email }</td>
+        <td>{ $r.weixin }</td>
+        <td>{ $r.add_time }</td>
+        <td class="td-btn">
+            { if $r.id != 1 }
+            { z_btn_frame_edit url='index.php?_=user_manage::edit' title="编辑用户" size="600px, 580px" }
+            { z_btn_del url='index.php?_=user_manage::delete' }
+            { /if }
+        </td>
+        </tr>
+        { /foreach }
+    </tbody>
+</table>
+</div>
+
+{ include '../main_bottom.html' }

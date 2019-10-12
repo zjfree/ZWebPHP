@@ -1,0 +1,81 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_ui_tmp';
+</script>
+
+<h3>Form控件</h3>
+<form id="frm2" method="POST" action="./tool/post.php" target="_blank">
+隐藏框：<input type="hidden" name="id" value="123" /><br>
+文本框：<input type="text" name="txt" placeholder="文本框" required autofocus maxlength="20" /><br>
+数字框：<input type="number" name="int" placeholder="整数" min="0" max="100" value="1" /><br>
+浮点框：<input type="number" name="float" placeholder="浮点数" min="0" max="100" value="1" step="0.01" /><br>
+电话框：<input type="tel" name="tel" placeholder="电话" /><br>
+颜色框：<input type="color" name="color" placeholder="颜色" /><br>
+日期框：<input type="date" name="date" placeholder="日期" /><br>
+时间框：<input type="datetime" name="datetime" placeholder="时间" /> <input type="datetime-local" name="datetime2" placeholder="时间" /><br>
+月份框：<input type="month" name="month" /><br>
+时间框：<input type="time" name="time" /><br>
+星期框：<input type="week" name="week" /><br>
+邮箱框：<input type="email" name="email" /><br>
+文件框：<input type="file" name="file" /><br>
+密码框：<input type="password" name="password" /><br>
+单选框：
+<label><input type="radio" name="radio" value="1" checked /> radio1</label> 
+<label><input type="radio" name="radio" value="2"  /> radio2</label>
+<br>
+多选框：
+<label><input type="checkbox" name="checkbox[]" value="1" checked /> checkbox1</label> 
+<label><input type="checkbox" name="checkbox[]" value="2" /> checkbox2</label>
+<br>
+范围框：<input id="range1" type="range" name="range" min="1" max="100" step="0.1" value="20" /><span id="range1_val"></span><br>
+搜索框：<input type="search" name="search" /><br>
+网址框：<input type="url" name="url" /><br>
+下拉框：<select name="select">
+    <optgroup label="a1">
+        <option value="1">option1</option>
+        <option value="2">option2</option>
+        <option value="3">option3</option>
+        <option value="4">option4</option>
+        <option value="5">option5</option>
+    </optgroup>
+    <optgroup label="a2">
+        <option value="11">option11</option>
+        <option value="12">option12</option>
+        <option value="13">option13</option>
+        <option value="14">option14</option>
+        <option value="15">option15</option>
+    </optgroup>
+</select><br>
+段落框：<textarea name="textarea" cols="100" rows="10" maxlength="100"></textarea><br>
+验证码：<input type="text" name="vcode" maxlength="4" required /> <img class="vcode" src="/tool/vimg.php?h=27"/><br>
+<hr>
+<input type="button" value="button" />
+<input type="image" src="static/img/img.png" />
+<button type="submit">提交</button>
+<button type="reset">重置</button>
+</form>
+
+<h3>POST测试</h3>
+<form id="frm1" class="ajax-submit" method="POST" action="./tool/ajax.php" target="_blank">
+<input type="text" name="" placeholder="" /><br>
+<input type="text" name="123" placeholder="123" /><br>
+<input type="text" name="a" placeholder="a" /><br>
+<input type="text" name="b[]" placeholder="b[]" /><br>
+<input type="text" name="b[]" placeholder="b[]" /><br>
+<input type="text" name="c[]" placeholder="c[]" /><br>
+<input type="text" name="d[a1]" placeholder="d[a1]" /><br>
+<input type="text" name="d[a2]" placeholder="d[a2]" /><br>
+<input type="text" name="e" placeholder="e" /><br>
+<input type="text" name="e" placeholder="e" /><br>
+<select name="user_type" data-select-val="3" class="auto-submit">
+    <option value="1">用户1</option>
+    <option value="2">用户2</option>
+    <option value="3">用户3</option>
+    <option value="4">用户4</option>
+</select>
+<hr>
+<button type="submit">提交</button>
+</form>
+
+{ include '../main_bottom.html' }

@@ -1,0 +1,66 @@
+{ include '../page_top.html' }
+
+<form class="z-form form-frame ajax-submit" method="POST" action="/index.php?_=user_manage::save" autocomplete="OFF">
+    <!--
+    <input type="text" autocomplete="OFF" autofocus required readonly placeholder="hello" pattern="[A-z]{3}" />
+    -->
+    <input type="hidden" name="id" value="{ $item.id|z_id:'user' }" />
+
+    <div class="form-item">
+        <label>类型：</label>
+        <select class="form-control form-control-sm" name="user_type_id" data-select-val="{ $item.user_type_id|default:'1' }">
+        { foreach $user_type_list as $r }
+        <option value="{ $r.id }">{ $r.name }</option>
+        { /foreach }
+        </select>
+    </div>
+    <div class="form-br"></div>
+    <div class="form-item">
+        <label>名称：</label>
+        <input class="form-control form-control-sm" type="text" name="name" autofocus required maxlength="30" value="{ $item.name }" />
+    </div>
+    <div class="form-item">
+        <label>账号：</label>
+        <input class="form-control form-control-sm" type="text" name="account" required maxlength="30" value="{ $item.account }" />
+    </div>
+    <div class="form-item">
+        <label>密码：</label>
+        { if $item.id == 0 }
+        <input class="form-control form-control-sm" type="text" name="passwd" required data-toggle="tooltip" title="密码必须填写，至少6位" />
+        { else }
+        <input class="form-control form-control-sm" type="text" name="passwd" />
+        <small>不修改密码时，密码留空即可</small>
+        { /if }
+    </div>
+    <div class="form-item">
+        <label>状态：</label>
+        <div class="checked-active" data-radio-val="{ $item.config|default:'1' }">
+            <label style="color:#33AA33;"><input type="radio" name="status" value="1" /> 启动</label>
+            <label style="color:red;"><input type="radio" name="status" value="0" /> 禁用</label>
+        </div>
+    </div>
+    <div class="form-br"></div>
+    <div class="form-item">
+        <label>手机号：</label>
+        <input class="form-control form-control-sm" type="text" name="phone" value="{ $item.phone }" />
+    </div>
+    <div class="form-item">
+        <label>电子邮箱：</label>
+        <input class="form-control form-control-sm" type="text" name="email" value="{ $item.email }" />
+    </div>
+    <div class="form-item">
+        <label>微信：</label>
+        <input class="form-control form-control-sm" type="text" name="weixin" value="{ $item.weixin }" />
+    </div>
+    <div class="form-item-full">
+        <label>备注：</label>
+        <div><textarea class="form-control form-control-sm" name="memo">{ $item.memo }</textarea></div>
+    </div>
+    <div class="form-error"></div>
+    <footer>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        <button class="btn btn-secondary cancel">取消</button>
+    </footer>
+</form>
+
+{ include '../page_bottom.html' }

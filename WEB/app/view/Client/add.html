@@ -1,0 +1,68 @@
+{ include '../page_top.html' }
+
+<form class="z-form form-frame ajax-submit" method="POST" action="/index.php?_=client::save" autocomplete="OFF">
+    <!--
+    <input type="text" autofocus required readonly placeholder="hello" pattern="[A-z]{3}" />
+    -->
+    <input type="hidden" name="id" value="{ $item.id|z_id:'client' }" />
+
+    <h3>基础信息</h3>
+    <div class="form-item">
+        <label>类型：</label>
+        <select class="form-control form-control-sm" name="client_type" data-select-val="{ $item.client_type|default:'0' }">
+        { foreach $client_type_list as $r }
+        <option value="{ $r.id }">{ $r.name }</option>
+        { /foreach }
+        </select>
+    </div>
+    <div class="form-item">
+        <label>名称：</label>
+        <input class="form-control form-control-sm" type="text" name="name" autofocus required maxlength="30" value="{ $item.name }" />
+    </div>
+    <div class="form-item">
+        <label>状态：</label>
+        <div class="checked-active" data-radio-val="{ $item.status|default:'1' }">
+            <label style="color:#33AA33;"><input type="radio" name="status" value="1" /> 启动</label>
+            <label style="color:red;"><input type="radio" name="status" value="0" /> 禁用</label>
+        </div>
+    </div>
+    
+    <div class="form-br10"></div>
+    <h3>扩展信息</h3>
+    <div class="form-item-full">
+        <label>公司全称：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[company]" value="{ $item.ext.company }" />
+    </div>
+    <div class="form-item">
+        <label>联系人：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[contact]" value="{ $item.ext.contact }" />
+    </div>
+    <div class="form-item">
+        <label>电话：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[tel]" value="{ $item.ext.tel }" />
+    </div>
+    <div class="form-item">
+        <label>电子邮箱：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[email]" value="{ $item.ext.email }" />
+    </div>
+    <div class="form-item">
+        <label>网址：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[url]" value="{ $item.ext.url }" />
+    </div>
+    <div class="form-item-full">
+        <label>地址：</label>
+        <input class="form-control form-control-sm" type="text" name="ext[address]" value="{ $item.ext.address }" />
+    </div>
+    
+    <div class="form-item-full">
+        <label>备注：</label>
+        <div><textarea class="form-control form-control-sm" name="memo">{ $item.memo }</textarea></div>
+    </div>
+    <div class="form-error"></div>
+    <footer>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        <button class="btn btn-secondary cancel">取消</button>
+    </footer>
+</form>
+
+{ include '../page_bottom.html' }

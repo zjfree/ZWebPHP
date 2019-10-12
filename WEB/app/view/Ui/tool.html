@@ -1,0 +1,117 @@
+{ include '../main_top.html' }
+
+<script>
+Z.config.navMenuId = 'NavMenu_ui_tool';
+</script>
+
+<h3>工具类 Tool</h3>
+<ul>
+    <li><code>json($data)</code> 获取JSON格式</li>
+    <li><code>jsonParse($str)</code> JSON解析为array</li>
+    <li><code>now()</code> 当前时间</li>
+    <li><code>sleep($ms)</code> 休眠</li>
+    <li><code>ms($ms_base = 0)</code> 毫秒数</li>
+    <li><code>guid($split = '')</code> 获取GUID</li>
+    <li><code>urlsafe_b64encode($string)</code> URL安全BASE64编码</li>
+    <li><code>urlsafe_b64decode($string)</code> URL安全BASE64解码</li>
+    <li><code>guid_short()</code> 短GUID</li>
+    <li><code>md5($str)</code> MD5（加盐）</li>
+    <li><code>url()</code> 获取当前URL</li>
+    <li><code>ip()</code> 获取当前IP</li>
+    <li><code>createDir($path)</code> 创建目录</li>
+    <li><code>delDir($src)</code> 循环删除文件夹</li>
+    <li><code>timespanFormat($seconds)</code> 时长格式化</li>
+    <li><code>byteFormat($byte)</code> 字节长度格式化</li>
+    <li><code>getDisks()</code> 获取所有磁盘</li>
+    <li><code>getDiskSize()</code> 获取所有磁盘大小</li>
+    <li><code>addDay($dt, $span)</code> 日期加减</li>
+    <li><code>parseCode($code)</code> 解析编码（表名，字段，变量）</li>
+    <li><code>getCode($code)</code> 生成验证CODE</li>
+    <li><code>getId($id, $table)</code> 生成验证ID</li>
+    <li><code>parseId($str, $table)</code> 解析ID</li>
+    <li><code>postUrl($url, $params = [])</code> post提交数据</li>
+</ul>
+
+<h3>日志类 Log</h3>
+<ul>
+    <li><code>writeFile($str, $type = 'log')</code> 写入文件日志</li>
+    <li><code>error($str)</code> 写入错误日志</li>
+    <li><code>add($str, $type = '日志')</code> 写入业务日志</li>
+    <li><code>debug()</code> 调式</li>
+</ul>
+
+<h3>缓存类 Cache</h3>
+<ul>
+    <li><code>get($key, $default = null)</code> 获取值</li>
+    <li><code>set($key, $val)</code> 设置值</li>
+    <li><code>delete($key)</code> 删除</li>
+    <li><code>add($key, $val = 1)</code> 递增</li>
+</ul>
+
+<h3>配置类 Config</h3>
+<ul>
+    <li><code>get($type, $key, $default = '')</code> 获取值</li>
+    <li><code>set($type, $key, $val)</code> 设置值</li>
+    <li><code>delete($type, $key = '')</code> 删除</li>
+    <li><code>getArr($type)</code> 获取一组值</li>
+    <li><code>setArr($type, $arr)</code> 更新一组值</li>
+</ul>
+
+<h3>用户类 User</h3>
+<ul>
+    <li><code>current()</code> 获取当前用户</li>
+    <li><code>getPassword($user_id, $passwd, $md5_count = 5)</code> 获取密码</li>
+    <li><code>login($account, $password)</code> 登录</li>
+    <li><code>logout()</code> 退出</li>
+    <li><code>hasPower($power_list)</code> 判断权限</li>
+    <li><code>checkPower($api)</code> 检测权限</li>
+    <li><code>setConfig($key, $val)</code> 设置当前用户配置</li>
+</ul>
+
+<h3>页面工具类 View [V]</h3>
+<ul>
+    <li><code>getSys()</code> 获取当前用户</li>
+    <li><code>setSys($key, $val)</code> 设置公共值</li>
+    <li><code>isMobile()</code> 是否手机</li>
+    <li><code>hasPower($str)</code> 是否有权限</li>
+    <li><code>getEnumList($key)</code> 获取枚举值列表</li>
+    <li><code>formatMenu()</code> 格式化输出菜单HTML</li>
+</ul>
+
+<h3>Smarty扩展 SmartyPlugin</h3>
+{ literal }
+<ul>
+    <li>删除按钮 <code>{ z_btn_del url='index.php?_=user_manage::delete' }</code></li>
+    <li>编辑按钮 <code>{ z_btn_edit url='index.php?_=user_manage::edit' }</code></li>
+    <li>弹框编辑按钮 <code>{ z_btn_frame_edit url='index.php?_=client::edit' title="编辑客户" size="600px, 710px" }</code></li>
+    <li>逗号分隔列表 <code>{ $list|z_list }</code></li>
+    <li>JSON输出 <code>{ $list|z_json }</code></li>
+    <li>金额格式化 <code>{ $list|z_money_format }</code></li>
+    <li>根据ID查询名称 <code>{ $r.id|z_id_name:'user' }</code></li>
+    <li>表格状态编辑 <code>{ $r.status|z_td_status:'index.php?_=client::update_status' }</code></li>
+    <li>枚举值HTML <code>{ $r.status|z_enum_format:'status' }</code></li>
+    <li>枚举值名称 <code>{ $r.status|z_enum_name:'status' }</code></li>
+    <li>验证字段 <code>{ 'client'|z_code }</code></li>
+    <li>验证ID <code>{ $r.id|z_id:'client' }</code></li>
+    <li>时长格式化 <code>{ $r.use_time|z_timespan }</code></li>
+    <li>日期输出 <code>{ $r.add_time|z_dt }</code></li>
+    <li>时间输出 <code>{ $r.add_time|z_date_time }</code></li>
+    <li>智能时间输出 <code>{ $r.add_time|z_time }</code></li>
+    <li>重量格式化 <code>{ $r.weight|z_weight_format }</code></li>
+    <li>字节格式化 <code>{ $r.size|z_byte_format }</code></li>
+    <li>百分比 <code>{ $r.weight|z_percent:$r.total_weight }</code></li>
+    <li>中文截断 <code>{ $r.name|z_cut:30 }</code></li>
+</ul>
+{ /literal }
+
+<h3>页面工具类 View [V]</h3>
+<ul>
+    <li><code>getSys()</code> 获取当前用户</li>
+    <li><code>setSys($key, $val)</code> 设置公共值</li>
+    <li><code>isMobile()</code> 是否手机</li>
+    <li><code>hasPower($str)</code> 是否有权限</li>
+    <li><code>getEnumList($key)</code> 获取枚举值列表</li>
+    <li><code>formatMenu()</code> 格式化输出菜单HTML</li>
+</ul>
+
+{ include '../main_bottom.html' }

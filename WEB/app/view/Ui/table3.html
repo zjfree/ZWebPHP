@@ -1,0 +1,107 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_ui_table_table3';
+</script>
+
+<h3>表格大数据 10万数据</h3>
+<div class="text-danger">无事件绑定，仅适合纯粹展示数据</div>
+
+<script id="tplTrList" type="text/x-template">
+{ $i =0 }
+{ section name=total loop=100000 }
+{ $i = $i + 1 }
+<@@>
+<tr data-id="{ $i }">
+<td>{ $i }</td>
+<td>{ zphp\Rand::ch(10, 20) }</td>
+<td>{ zphp\Rand::num(100, 200) }-{ zphp\Rand::num(200, 500) }元</td>
+<td>{ zphp\Rand::num(2000, 2018) }年</td>
+<td>{ zphp\Rand::time() }</td>
+<td>
+    <a href="#">编辑</a>
+    <a href="#">删除</a>
+</td>
+</tr>
+{ /section }
+</script>
+
+<script>
+var trList = document.getElementById('tplTrList').innerHTML.split('<@@>');
+trList.splice(0,1);
+console.log(trList);
+
+$(function(){
+    var max_height = $(window).height();
+    var table_height = $('#tb1').outerHeight();
+    //var top = 60;
+    var top = $('#tb1').offset().top + 10;
+    var tr_height = $('#tb1 thead tr').eq(0).outerHeight();
+    var tr_show_count = Math.floor((max_height - top - table_height) / tr_height);
+    var height = table_height + tr_show_count * tr_height;
+    $('.tbListBigJsDiv').css('height', height);
+    var max_height = table_height + trList.length * tr_height;
+    $('.tbListBigJsDiv').append('<div style="height:' + max_height + 'px;"></div>')
+
+    for (var i=0; i<tr_show_count; i++)
+    {
+        $('#tb1 tbody').append(trList[i]);
+    }
+    
+    $('.tbListBigJsDiv').scroll(function(){
+        console.time('scroll');
+        var top = $(this).scrollTop();
+        top = Math.min(max_height - height, top);
+        $(this).find('.tbList').css('top', '' + top + 'px');
+
+        var showIndex = Math.floor(top / tr_height);
+        $('#tb1 tbody>tr').remove();
+            
+        for (var i=showIndex; i<showIndex + tr_show_count; i++)
+        {
+            $('#tb1 tbody').append(trList[i]);
+        }
+        console.timeEnd('scroll');
+    });
+
+});
+</script>
+<style>
+.tbListBigJsDiv{
+    width:100%; overflow-y:auto;
+    margin-bottom:10px;
+    height:600px;
+    position: relative;
+}
+.tbListBigJsDiv .tbList{
+    margin-bottom:0;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+<div class="tbListBigJsDiv">
+<table id="tb1" class="tbList" data-table="table1">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>名称&uarr;</th>
+        <th>价格&darr;</th>
+        <th>上市</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <span class="foot-info">共100000条</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+</div>
+
+{ include '../main_bottom.html' }

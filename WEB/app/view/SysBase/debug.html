@@ -1,0 +1,56 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_debug';
+</script>
+
+<h3 class="page-header"><i class="fa fa-bug"></i> 调试信息</h3>
+
+<a href="/index.php?_=sys_base::phpinfo" class="btn btn-primary btn-sm" target="_blank">PHPINFO</a>
+<a href="/index.php?_=sys_base::db_query" class="btn btn-primary btn-sm">数据库查询</a>
+<a href="/index.php?_=sys_base::err" class="btn btn-primary btn-sm" target="_blank">错误页</a>
+<a href="/index.php?_=sys_base::debug_info" class="btn btn-primary btn-sm">调式信息</a>
+&nbsp;
+<a href="/index.php?_=sys_base::user_log_clear" class="btn btn-danger btn-sm" target="_blank">清空操作日志</a>
+<a href="/index.php?_=sys_base::file_log_clear" class="btn btn-danger btn-sm" target="_blank">清空文件日志</a>
+<a href="/index.php?_=sys_base::upload_clear" class="btn btn-danger btn-sm" target="_blank">清空上传目录</a>
+
+<h3>运行状况</h3>
+<table class="tb-attr">
+    { foreach $list as $k => $v }
+    <tr><th>{ $k }：</th><td>{ $v }</td></tr>
+    { /foreach }
+</table>
+
+<h3>磁盘使用率</h3>
+<table class="tbList">
+    <thead>
+        <tr>
+            <th>盘符</th>
+            <th>总大小</th>
+            <th>已用</th>
+            <th>剩余</th>
+            <th>已用</th>
+            <th>图例</th>
+        </tr>
+    </thead>
+    <tbody>
+        { foreach $disk_list as $r }
+        <tr>
+                <td>{ $r.name }</td>
+                <td>{ $r.total|z_byte_format }</td>
+                <td>{ ($r.total - $r.free)|z_byte_format }</td>
+                <td>{ $r.free|z_byte_format }</td>
+                { if $r.precent > 90 }
+                    <td style="color:red;">{ $r.precent }%</td>
+                    <td data-background-progress="{ $r.precent }|red"></td>
+                { else }
+                    <td>{ $r.precent }%</td>
+                    <td data-background-progress="{ $r.precent }"></td>
+                { /if }
+        </tr>
+        { /foreach }
+    </tbody>
+</table>
+
+{ include '../main_bottom.html' }

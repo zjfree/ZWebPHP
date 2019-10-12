@@ -1,0 +1,250 @@
+{ include '../main_top.html' }
+<style>
+.z-breadcrumb{
+    display: none;
+}
+</style>
+<h3 class="page-header"><i class="fa fa-home"></i> 管理系统首页</h3>
+
+<h3>{ $today }</h3>
+
+<!--备忘信息-->
+<style>
+#divMemo{
+    position:absolute;
+    top:55px;
+    right:10px;
+    box-shadow: 3px 3px 10px #666;
+    z-index: 100;
+    opacity: 0.7;
+    overflow: hidden;
+}
+#divMemo:focus-within,#divMemo:hover{
+    opacity: 1;
+}
+#divMemo h3{
+    font-size:14px;
+    background: #C79200;
+    color:#fff;
+    margin:0;
+    padding:5px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+#divMemo textarea{
+    width:350px;
+    height:200px;
+    display: block;
+    border:solid 2px #C79200;
+    background: #FFF4E3;
+    outline: 0;
+    font-size:14px;
+}
+#divMemo h3 span{
+    cursor: pointer;
+}
+
+#divMemo.min{
+    box-shadow: none;
+    border-top-left-radius:0;
+    border-top-right-radius:0;
+    border-radius: 5px;
+    opacity: 1;
+}
+#divMemo.min h3 .btn
+{
+    display: none;
+}
+#divMemo.min>div{
+    display: none;
+}
+</style>
+<div id="divMemo" class="min">
+<h3>
+    <span><i class="fa fa-pencil-square"></i> 备忘信息</span>
+    <a class="btn btn-dark btn-sm" href="javascript:saveMemo();" style="float:right; padding:0px 5px; font-size:12px;"><i class="fa fa-save"></i>保存</a>
+</h3>
+<div>
+    <textarea onblur="saveMemo();" style="min-height:100px;">{ $_user.notebook|html }</textarea>
+</div>
+</div>
+<script>
+var oldMemo = '';
+function saveMemo()
+{
+    var memo = $('#divMemo textarea').val();
+    if (memo == oldMemo)
+    {
+        return;
+    }
+    Z.ajax({
+        url:'index.php?_=my::save_memo',
+        data:{memo:memo},
+        success:function(res){
+            layer.msg('备忘已保存');
+        },
+    });
+
+    oldMemo = memo;
+}
+$(function(){
+    oldMemo = $('#divMemo textarea').val();
+    $('#divMemo h3 span').click(function(){
+        $('#divMemo').toggleClass('min');
+    });
+});
+</script>
+
+<div class="card panel mb-3">
+    <div class="card-header">
+        <i class="fa fa-cloud"></i> 天气预报
+    </div>
+    <div class="card-body">
+        <iframe style="float:left;" src="http://i.tianqi.com/index.php?c=code&id=12&icon=3&num=5" width="650" height="60" frameborder="0"
+        marginwidth="0" marginheight="0" scrolling="no"></iframe>
+    </div>
+</div>
+
+{ if $notice }
+<div class="card panel mb-3">
+    <div class="card-header">
+        <i class="fa fa-volume-up"></i> 系统公告
+    </div>
+    <div class="card-body">
+        { $notice|nl2br }
+    </div>
+</div>
+{ /if }
+
+<style>
+.divCard{
+    float:left;
+    border:solid 1px #ddd;
+    background: #fff;
+    margin-right:15px;
+    margin-bottom:5px;
+    margin-top:20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #ddd;
+    position: relative;
+    width:150px;
+    height:70px;
+}
+.divCard h3{
+    font-size:14px;
+    position:absolute;
+    top:10px;
+    right:10px;
+    text-align: right;
+    line-height: 1;
+    margin:0;
+    padding:0;
+    color:#999;
+}
+.divCard span{
+    font-size:25px;
+    position:absolute;
+    bottom:10px;
+    right:10px;
+    text-align: right;
+    line-height: 1;
+    margin:0;
+    padding:0;
+    color:#666;
+    font-weight: bold;
+}
+.divCard span small{
+    font-size:14px;
+}
+.divCard .icon{
+    position:absolute;
+    top:-15px;
+    left:10px;
+    background: blue;
+    font-size:30px;
+    color:#fff;
+    text-align: center;
+    padding:5px;
+    line-height: 1;
+    box-shadow: 3px 3px 10px #ddd;
+    border-radius: 3px;
+}
+</style>
+<div class="card panel mb-3">
+    <div class="card-header">
+        <i class="fa fa-bar-chart"></i> 今日系统工作汇总
+    </div>
+    <div class="card-body">
+        <div class="divCard">
+            <div class="icon" style="background:#FC940B;"><i class="fa fa-truck"></i></div>
+            <h3>进料车次</h3>
+            <span>25 <small>次</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#E12B6B;"><i class="fa fa-sign-in fa-flip-horizontal"></i></div>
+            <h3>进料重量</h3>
+            <span>250 <small>吨</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#55AE59;"><i class="fa fa-truck fa-flip-horizontal"></i></div>
+            <h3>出料车次</h3>
+            <span>29 <small>次</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#20C2D6;"><i class="fa fa-sign-out"></i></div>
+            <h3>出料重量</h3>
+            <span>387 <small>吨</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#9020D6;"><i class="fa fa-exchange"></i></div>
+            <h3>称重次数</h3>
+            <span>59 <small>次</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#2072D6;"><i class="fa fa-user"></i></div>
+            <h3>在线人数</h3>
+            <span>10 <small>人</small></span>
+        </div>
+        <div class="divCard">
+            <div class="icon" style="background:#D4AD20;"><i class="fa fa-group"></i></div>
+            <h3>登录次数</h3>
+            <span>15 <small>次</small></span>
+        </div>
+        
+        
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<style>
+.divBtn .btn{
+    display: inline-block;
+    margin-bottom:5px;
+}
+</style>
+<div class="card panel mb-3">
+    <div class="card-header">
+        <i class="fa fa-th"></i> 常用功能
+    </div>
+    <div class="card-body divBtn">
+        <a class="btn btn-primary" href="#"><i class="fa fa-map"></i> 在线车辆地图</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-filter"></i> 原材料消耗</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-pie-chart"></i> 产能分析</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-cubes"></i> 原材料库存</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-comment"></i> 信息中心</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-eye"></i> 磅房监控</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-file-text"></i> 销售合同</a>
+        <a class="btn btn-primary" href="#"><i class="fa fa-file-excel-o"></i> 采购合同</a>
+    </div>
+</div>
+
+<div class="card panel mb-3">
+    <div class="card-header">
+        <i class="fa fa-arrow-right"></i> 系统工作流程图
+    </div>
+    <div class="card-body" style="padding:0;">
+        <img src="/static/img/flow.PNG" style="border-right:solid 1px #ccc; max-width: 100%; min-width: 800px;" />
+    </div>
+</div>
+
+{ include '../main_bottom.html' }

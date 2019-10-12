@@ -1,0 +1,29 @@
+{
+    "name": "ZWebPHP",
+    "description": "ZWebPHP 开发框架",
+    "type": "project",
+    "keywords": [
+        "zjfree"
+    ],
+    "homepage": "http://thinkphp.cn/",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "zjfree",
+            "email": "zjfree@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "smarty/smarty": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/",
+            "zphp\\": "zphp/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    }
+}

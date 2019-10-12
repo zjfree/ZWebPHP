@@ -1,0 +1,30 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_index';
+    Z.config.navBreadcrumb = '当前用户信息';
+</script>
+
+<h3 class="page-header"><i class="fa fa-user-circle"></i> { $_user.name } ({ $_user.account })</h3>
+
+<nav>
+<div class="nav nav-tabs">
+<a class="nav-item nav-link active" href="#nav-info">用户信息</a>
+<a class="nav-item nav-link" href="/index.php?_=my::passwd">修改密码</a>
+<a class="nav-item nav-link" href="/index.php?_=my::edit">编辑信息</a>
+</div>
+</nav>
+
+<table class="tb-attr mt-3">
+    <tr><th>账户：</th><td>{ $_user.account }</td></tr>
+    <tr><th>名称：</th><td>{ $_user.name }</td></tr>
+    <tr><th>用户类型：</th><td>{ $_user.user_type.name }</td></tr>
+    <tr><th>手机号：</th><td>{ $_user.phone }</td></tr>
+    <tr><th>电子邮箱：</th><td>{ $_user.email }</td></tr>
+    <tr><th>微信：</th><td>{ $_user.weixin }</td></tr>
+    <tr><th>注册时间：</th><td>{ $_user.add_time }</td></tr>
+    <tr><th>登录时间：</th><td>{ $_user.login_time }</td></tr>
+    <tr><th>备注：</th><td>{ $_user.memo|nl2br }</td></tr>
+</table>
+
+{ include '../main_bottom.html' }

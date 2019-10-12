@@ -1,0 +1,88 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_log';
+</script>
+<h3 class="page-header"><i class="fa fa-users"></i> 系统操作日志</h3>
+
+<style>
+</style>
+
+<!--表格顶部工具栏-->
+<form id="frmQuery" class="form-query form-inline">
+    <input type="hidden" name="_" value="{ $_api.base }" />
+    <input type="hidden" name="page" value="{ $page }" />
+    <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+        </div>
+        <input type="date" class="form-control auto-submit" name="dt" value="{ $dt }">
+    </div>
+    &nbsp;
+    <button type="submit" class="btn btn-primary btn-sm">
+        <i class="fa fa-search"></i> 查询
+    </button>
+    &nbsp;
+    <button type="submit" class="btn btn-danger btn-sm">
+        <i class="fa fa-trash"></i> 删除
+    </button>
+
+    <!--表格工具-->
+    <div class="table-tool btn-toolbar">
+        <div class="btn-group btn-group-sm" role="group">
+            <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="刷新数据"><i class="fa fa-refresh"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="表格打印"><i class="fa fa-print"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="导出EXCEL"><i class="fa fa-external-link"></i></button>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item active" href="#"><i class="fa fa-check"></i> ID编号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-up"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="tbListDiv">
+<table id="tb1" class="tbList fix-header">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>操作时间</th>
+        <th>用户类型</th>
+        <th>用户名</th>
+        <th>操作类型</th>
+        <th>内容</th>
+        </tr>
+    </thead>
+    <tbody>
+        { foreach $list as $r }
+        <tr style="font-size:12px;">
+        <td>{ $r.id }</td>
+        <td>{ $r.add_time|z_time }</td>
+        <td>{ $r.user_type }</td>
+        <td>{ $r.user_name }</td>
+        <td>{ $r.type }</td>
+        <td>{ $r.content|nl2br }</td>
+        </tr>
+        { /foreach }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <span class="foot-info">共{ $count }条</span>
+                <span class="page" data-form="frmQuery" data-total="{ $count }" data-page="{ $page }" data-page-size="30">
+                </span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+</div>
+
+{ include '../main_bottom.html' }

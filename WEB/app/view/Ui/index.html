@@ -1,0 +1,140 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_ui_index';
+</script>
+
+<h3>概述</h3>
+
+<p>
+    设计目的：标准化、体验统一、简单可靠、易于扩展
+</p>
+
+<h3>后端PHP框架</h3>
+<p>
+    基于<code>PHP</code>、<code>smarty</code> 构建。<br>
+    基于<code>composer</code>自动加载。<br>
+    完全基于API接口设计，API文档自动生成。<br>
+    权限包含菜单访问权限和API接口访问权限。<br>
+    工具类、数据库操作封装。<br>
+    默认用户：super_admin 密码：域名<br>
+</p>
+
+<h3>前端H5框架</h3>
+<p>
+    兼容webkit内核最新浏览器，不兼容老式浏览器。<br>
+    基于<code>jquery</code>、<code>Bootstrap4</code>、<code>layer 弹出层</code><br>
+    设计基于原始HTML5组件，自定义的表格和表单控件。<br>
+    前后端交互标准封装，细节优化实现快速开发。<br>
+    降低前端开发难度<br>
+</p>
+
+<h3>工具依赖</h3>
+
+<div>
+<a class="btn btn-primary" target="_blank" href="/tool/icon_fa.html">图标选择</a></li>
+<a class="btn btn-primary" target="_blank" href="http://www.fontawesome.com.cn/icons-ui/">fontawesome</a>
+<a class="btn btn-primary" target="_blank" href="//v4.bootcss.com/">Bootstrap4</a>
+<a class="btn btn-primary" target="_blank" href="//layer.layui.com/">layer 弹出层</a>
+<a class="btn btn-primary" target="_blank" href="//popper.js.org/">popper 弹出层</a>
+<a class="btn btn-primary" target="_blank" href="http://www.w3school.com.cn/jquery/">jquery</a>
+<a class="btn btn-primary" target="_blank" href="https://cdn.baomitu.com/">360CDN</a>
+<a class="btn btn-primary" target="_blank" href="https://www.smarty.net/docs/zh_CN/">smarty 模板引擎</a>
+</div>
+
+<h3>第三方组件</h3>
+
+<div>
+<a class="btn btn-primary" target="_blank" href="https://echarts.baidu.com">EChart</a></li>
+<a class="btn btn-primary" target="_blank" href="https://www.chartjs.org">chart.js</a>
+<a class="btn btn-primary" target="_blank" href="https://www.jstree.com">jstree</a>
+<a class="btn btn-primary" target="_blank" href="https://leafletjs.com">leafletjs 地图</a>
+</div>
+
+<h3>颜色</h3>
+
+<table class="tbList">
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>代码</th>
+            <th>颜色</th>
+            <th>背景</th>
+            <th>淡色</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>首要</td>
+            <td>.text-primary</td>
+            <td style="color:#007bff;">#007bff</td>
+            <td style="background:#007bff; color:#fff;">#007bff</td>
+            <td style="background:#EAF4FF">#EAF4FF</td>
+        </tr>
+        <tr>
+            <td>次要</td>
+            <td>.text-secondary</td>
+            <td style="color:#6c757d;">#6c757d</td>
+            <td style="background:#6c757d; color:#fff;">#6c757d</td>
+            <td style="background:#F5F5F6;">#F5F5F6</td>
+        </tr>
+        <tr>
+            <td>成功</td>
+            <td>.text-success</td>
+            <td style="color:#28a745;">#28a745</td>
+            <td style="background:#28a745; color:#fff;">#28a745</td>
+            <td style="background:#EFFBF1;">#EFFBF1</td>
+        </tr>
+        <tr>
+            <td>危险</td>
+            <td>.text-danger</td>
+            <td style="color:#dc3545;">#dc3545</td>
+            <td style="background:#dc3545; color:#fff;">#dc3545</td>
+            <td style="background:#FBE5E6;">#FBE5E6</td>
+        </tr>
+        <tr>
+            <td>警告</td>
+            <td>.text-warning</td>
+            <td style="color:#ffc107;">#ffc107</td>
+            <td style="background:#ffc107; color:#fff;">#ffc107</td>
+            <td style="background:#FFFBF0;">#FFFBF0</td>
+        </tr>
+        <tr>
+            <td>信息</td>
+            <td>.text-info</td>
+            <td style="color:#17a2b8;">#17a2b8</td>
+            <td style="background:#17a2b8; color:#fff;">#17a2b8</td>
+            <td style="background:#D8F6FB;">#D8F6FB</td>
+        </tr>
+        <tr>
+            <td>浅色</td>
+            <td>.text-light</td>
+            <td style="color:#f8f9fa; background:#000;">#f8f9fa</td>
+            <td style="background:#f8f9fa; color:#000;">#f8f9fa</td>
+            <td style="background:#39434E; color:#fff;">#39434E</td>
+        </tr>
+        <tr>
+            <td>深色</td>
+            <td>.text-dark</td>
+            <td style="color:#343a40;">#343a40</td>
+            <td style="background:#343a40; color:#fff;">#343a40</td>
+            <td style="background:#CCD2D5;">#CCD2D5</td>
+        </tr>
+        <tr>
+            <td>柔色</td>
+            <td>.text-muted</td>
+            <td style="color:#6c757d;">#6c757d</td>
+            <td style="background:#6c757d; color:#fff;">#6c757d</td>
+            <td style="background:#E7E9EA;">#E7E9EA</td>
+        </tr>
+        <tr>
+            <td>白色</td>
+            <td>.text-white</td>
+            <td style="color:#ffffff; background:#000;">#ffffff</td>
+            <td style="background:#ffffff; color:#000;">#ffffff</td>
+            <td style="background:#151515; color:#fff;">#151515</td>
+        </tr>
+    </tbody>
+</table>
+
+{ include '../main_bottom.html' }

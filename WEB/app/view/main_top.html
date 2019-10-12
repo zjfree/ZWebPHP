@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>{ $title|default:$_sys.sys_name }</title>
+
+    <link href="https://lib.baomitu.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./static/css/base.css" rel="stylesheet">
+
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://lib.baomitu.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://lib.baomitu.com/layer/3.1.1/layer.js"></script>
+    <script src="https://lib.baomitu.com/printThis/1.14.0/printThis.min.js"></script>
+    <script src="./static/js/base.js?v=20190424_01"></script>
+</head>
+
+<body>
+    { if $_sys.browser == 'pc' }
+    <!--顶部导航栏-->
+    <nav id="divMainTop" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="./static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="LOGO">
+            { $sys_name|default:$_sys.sys_name }
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMainTop">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMainTop">
+            <ul class="navbar-nav mr-auto">
+                <!--
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                        Dropdown
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                -->
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <!--
+                <a href="/index.php?_=user_manage::reload" target="_blank" class="btn btn-sm btn-primary">
+                    <i class="fa fa-cog"></i> 工具
+                </a>
+                -->
+                { if $_sys.msg_count > 0 }
+                &nbsp;
+                <a class="btn btn-sm btn-danger" href="/index.php?_=msg">
+                    <i class="fa fa-comment"></i> { $_sys.msg_count }
+                </a>
+                { /if }
+                <!--
+                &nbsp;
+                <div class="nav-item input-group">
+                    <input type="search" class="form-control form-control-sm" placeholder="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sm btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                -->
+                &nbsp;
+                <div class="nav-item btn-group">
+                    <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user fa-ff"></i> { $_user.name }
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/index.php?_=my"><i class="fa fa-user"></i> 用户信息</a>
+                        <a class="dropdown-item" href="/index.php?_=my::edit"><i class="fa fa-edit"></i> 更新配置</a>
+                        <a class="dropdown-item" href="/index.php?_=my::passwd"><i class="fa fa-key"></i> 修改密码</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/index.php?_=User::logout"><i class="fa fa-sign-out"></i> 安全退出</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </nav>
+    
+    <!--系统导航菜单-->
+    <nav id="divMainMenu" class="nav-menu">
+        <a id="NavMenu_index" href="index.php"><i class="fa fa-home"></i> 首页</a>
+        { V::formatMenu() }
+    </nav>
+    
+    <!--主内容展示区-->
+    <div id="divMainContent">
+
+    { else }
+
+    <!--手机顶部-->
+    <div style="background:#000; color:#fff;">
+        <a class="navbar-brand" href="/index.php?_=sys::phone_index">
+            <img src="./static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="LOGO">
+            <span style="font-size:16px;">{ $sys_name|default:$_sys.sys_name }</span>
+        </a>
+    </div>
+    <!--系统导航菜单-->
+    <nav id="divMainMenu" class="nav-menu" style="display: none;">
+        <a id="NavMenu_index" href="index.php"><i class="fa fa-home"></i> 首页</a>
+        { V::formatMenu() }
+    </nav>
+    <!--主内容展示区-->
+    <div id="divMainContent" style="margin:0 10px 20px 10px; padding-top:10px;">
+    { /if }
+
+    <!--面包屑-->
+    <nav class="z-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i>首页</a></li>
+        </ol>
+    </nav>
+    

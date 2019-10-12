@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>API文档中心</title>
+    <link href="https://lib.baomitu.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+        
+    <style>
+    body{
+        font-family: Consolas, 'Courier New', '微软雅黑';
+        font-size:14px;
+    }
+    .class_title{
+        background: #ddd;
+        padding:3px 10px;
+        font-size: 18px;
+        color:brown;
+    }
+    
+    table.tb {
+        font-family: Consolas, verdana,arial,sans-serif;
+        font-size:14px;
+        color:#333333;
+        border-collapse: collapse;
+        border: solid 2px #999;
+        margin:10px 0;
+        font-size:12px;
+    }
+    table.tb th {
+        border: solid 1px #999;
+        padding: 5px 10px;
+        background-color: #dedede;
+        font-weight: normal;
+        text-align:center;
+    }
+    table.tb td {
+        border: solid 1px #999;
+        padding: 5px 10px;
+        background-color: #ffffff;
+        text-align:center;
+    }
+    table.tb a{
+        text-decoration:none;
+    }
+    
+    .main_nav{
+        position:fixed;
+        top:0;
+        bottom:0;
+        left:0;
+        width:300px;
+        border-right:solid 2px gray;
+        overflow: auto;
+        background: rgb(235, 250, 255);
+        font-size:14px;
+    }
+
+    .menu_list a{
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+<div class="main_nav">
+<h1 style="padding:10px; margin:0; font-size:24px; "><i class="fa fa-book"></i> API文档中心</h1>
+<div style="padding:5px 10px; font-size:12px; border-top:solid 1px gray; border-bottom:solid 1px gray;">
+    <a href="/tool/build.php" target="_blank">API重新生成</a> <br> { $build_time }
+</div>
+<div style="margin:10px;" class="menu_list">
+    <a href="#nav_enum" style="color:brown;">Enum列表</a>
+    { foreach $api_list as $class }
+        <a href="#nav_{ $class.code }" style="color:brown;">{ $class.code } { $class.doc.name }</a>
+        { foreach $class.fn_list as $fn }
+        <a href="#nav_{ $class.code }_{ $fn.code }" style="color:blue; font-size:12px; margin-left:20px;">{ $fn.code }{ if $fn.code != $fn.doc.name } { $fn.doc.name }{ /if }</a>
+        { /foreach }
+    { /foreach }
+</div>
+</div>
+
+<div style="margin-left:300px;">
+<h3 id="nav_enum" class="class_title">Enum列表</h3>
+<div style="margin:10px;">
+{ foreach $enum_list as $k => $r }
+{ $k } { $r.name }
+<table class="tb">
+    <thead>
+        <tr>
+            <th>常量</th>
+            <th>代码</th>
+            <th>名称</th>
+            <th>值</th>
+            <th>图标</th>
+            <th>颜色</th>
+        </tr>
+    </thead>
+    <tbody>
+    { foreach $r.list as $kk => $rr }
+    <tr>
+        <td style="color:#0033CC;">EnumConst::{ $k|upper }_{ $rr.tag|upper }</td>
+        <td>{ $rr.tag }</td>
+        <td>{ $rr.name|default:'' }</td>
+        <td>{ $kk }</td>
+        <td><i class="{ $rr.icon|default:'' }"></i></td>
+        <td style="color:{ $rr.color|default:'black' };">{ $rr.color|default:'' }</td>
+    </tr>
+    { /foreach }
+    </tbody>
+</table>
+{ /foreach }
+</div>
+
+{ foreach $api_list as $class }
+<h3 id="nav_{ $class.code }" class="class_title">
+    { $class.code }
+    { if $class.doc.name != $class.code }
+        <small>
+        ({ $class.doc.name })
+        </small>
+    { /if }
+</h3>
+
+<div style="margin:10px;">
+    { if $class.doc.memo != '' }<div>备注：{ $class.doc.memo }</div>{ /if }
+    { if $class.doc.author != '' }<div>作者：{ $class.doc.author }</div>{ /if }
+    { if $class.doc.date != '' }<div>日期：{ $class.doc.date }</div>{ /if }
+    <div>权限：{ if $class.need_login }需要登录{ else }无访问限制{ /if }</div>
+    <ul>
+    { foreach $class.fn_list as $fn }
+    <li>
+        <div id="nav_{ $class.code }_{ $fn.code }" style="color:blue; padding:3px 5px;">
+            { $fn.code }
+            { if $fn.doc.name != $fn.code }
+                <small>
+                ({ $fn.doc.name })
+                </small>
+            { /if }
+        </div>
+        { if $fn.doc.memo != '' }<div>备注：{ $fn.doc.memo }</div>{ /if }
+        { if $fn.doc.author != '' }<div>作者：{ $fn.doc.author }<div>{ /if }
+        { if $fn.doc.date != '' }<div>日期：{ $fn.doc.date }<div>{ /if }
+        { if $fn.doc.return != '' }<div>返回：{ $fn.doc.return }<div>{ /if }
+        { if count($fn.params) == 0 }
+        <div>参数：无</div>
+        { else }
+        <table class="tb">
+            <thead>
+                <tr>
+                    <th>代码</th>
+                    <th>名称</th>
+                    <th>是否必填</th>
+                    <th>类型</th>
+                    <th>默认值</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody>
+            { foreach $fn.params as $p }
+            <tr>
+                <td>{ $p.code }</td>
+                <td>{ $p.name }</td>
+                <td>{ if $p.require }必填{ else }非必填{ /if }</td>
+                <td>{ $p.type }</td>
+                <td>{ $p.value }</td>
+                <td>{ $p.memo }</td>
+            </tr>
+            { /foreach }
+            </tbody>
+        </table>
+        { /if }
+    </li>
+    { /foreach }
+    </ul>
+</div>
+
+{ /foreach }
+</div>
+</body>
+</html>

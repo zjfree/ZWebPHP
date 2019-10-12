@@ -1,0 +1,130 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_user_type';
+    Z.config.navBreadcrumb = '{ if $item.id == 0 }添加{ else }编辑{ /if }';
+</script>
+
+<style>
+    .chk-tree{
+        max-height: 500px;
+        overflow-y: auto;
+        border:solid 1px #ddd;
+        padding:5px 10px;
+    }
+    .chk-tree label{
+        display: block;
+    }
+    .chk-all{
+        float: right;
+    }
+    .z-form>.form-item>.chk-all:before{
+        content:''
+    }
+    .chk-all input{
+        position: relative;
+        top: 2px;
+    }
+</style>
+
+<h3 class="page-header"><i class="fa fa-users"></i> 用户类型{ if $item.id == 0 }添加{ else }编辑{ /if }</h3>
+
+<form class="z-form ajax-submit col3" method="POST" action="/index.php?_=user_type::save">
+    <!--
+    <input type="text" autocomplete="OFF" autofocus required readonly placeholder="hello" pattern="[A-z]{3}" />
+    -->
+    <input type="hidden" name="id" value="{ $item.id|z_id:'user_type' }" />
+    <div class="form-item">
+        <label>名称：</label>
+        <input class="form-control form-control-sm" type="text" name="name" autofocus required maxlength="30" value="{ $item.name }" />
+    </div>
+    <div class="form-item">
+        <label>编号：</label>
+        <input class="form-control form-control-sm" type="text" name="code" required maxlength="30" value="{ $item.code }" />
+    </div>
+    <div class="form-item">
+        <label>是否隐藏：</label>
+        <div class="checked-active" data-radio-val="{ $item.is_hide|default:0 }">
+            <label><input type="radio" name="is_hide" value="0" /> 显示</label>
+            <label><input type="radio" name="is_hide" value="1" /> 隐藏</label>
+        </div>
+    </div>
+    <div class="form-br"></div>
+    <div class="form-item" style="height:auto; width:50%;">
+        <label>菜单：</label>
+        <label class="chk-all"><input type="checkbox" /> 全选</label>
+        <div class="checked-active chk-tree" data-checkbox-val="{ $item.menu }">
+            { foreach $menu_list as $k => $r }
+            { if $r.title }
+                <label style="color:#001BA4; margin:5px 0;"><input type="checkbox" name="menu[]" value="{ $k }" /> <b>{ if $r.icon }<i class="{ $r.icon }"></i> { /if }{ $r.title }</b></label>
+            { elseif $r.list }
+                <div class="div-chk-all">
+                <label style="color:#B5002F;"><input type="checkbox" name="menu[]" value="{ $k }" /> { if $r.icon }<i class="{ $r.icon }"></i> { /if }{ $r.name }</label>
+                <div style="margin-left:20px;">
+                { foreach $r.list as $kk => $rr }
+                <label style="color:#48A600;"><input type="checkbox" name="menu[]" value="{ $k }.{ $kk }" /> { if $rr.icon }<i class="{ $rr.icon }"></i> { /if }{ $rr.name }</label>
+                { /foreach }
+                </div>
+                </div>
+            { else }
+                <label style="color:#48A600;"><input type="checkbox" name="menu[]" value="{ $k }" /> { if $r.icon }<i class="{ $r.icon }"></i> { /if }{ $r.name }</label>
+            { /if }
+            { /foreach }
+        </div>
+    </div>
+    <div class="form-item" style="height:auto; width:50%;">
+        <label>API权限：</label>
+        <label class="chk-all"><input type="checkbox" /> 全选</label>
+        <div class="checked-active chk-tree" data-checkbox-val="{ $item.power }">
+            { foreach $api_list as $r }
+                <div class="div-chk-all">
+                <label style="color:#B5002F;"><input type="checkbox" name="power[]" value="{ $r.code }" /> { $r.code } { $r.doc.name }</label>
+                <div style="margin-left:20px;">
+                { foreach $r.fn_list as $rr }
+                <label style="color:#48A600;"><input type="checkbox" name="power[]" value="{ $r.code }.{ $rr.code }" /> { $rr.code }{ if $rr.doc.name != $rr.code } { $rr.doc.name }{ /if }</label>
+                { /foreach }
+                </div>
+                </div>
+            { /foreach }
+        </div>
+    </div>
+    <div class="form-item-full">
+        <label>备注：</label>
+        <div><textarea name="memo" class="form-control form-control-sm">{ $item.memo }</textarea></div>
+    </div>
+    <div class="form-error"></div>
+    <footer>
+        <button class="btn btn-primary" type="submit"><i class="fa fa-check-circle"></i> 提交</button>
+        <a class="btn btn-secondary" href="/index.php?_=user_type">取消</a>
+    </footer>
+</form>
+
+<script>
+$(function(){
+    $('.chk-all input').change(function(){
+        if (this.checked)
+        {
+            $(this).parent().parent().find('.chk-tree label').addClass('active');
+        }
+        else
+        {
+            $(this).parent().parent().find('.chk-tree label').removeClass('active');
+        }
+        $(this).parent().parent().find('.chk-tree input[type=checkbox]').prop('checked', this.checked);
+    });
+
+    $('.div-chk-all>label>input').change(function(){
+        if (this.checked)
+        {
+            $(this).parent().parent().find('label').addClass('active');
+        }
+        else
+        {
+            $(this).parent().parent().find('label').removeClass('active');
+        }
+        $(this).parent().parent().find('input[type=checkbox]').prop('checked', this.checked);
+    });
+});
+</script>
+
+{ include '../main_bottom.html' }

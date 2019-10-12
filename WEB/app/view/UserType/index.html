@@ -1,0 +1,75 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_sys_user_type';
+</script>
+<h3 class="page-header"><i class="fa fa-users"></i> 用户类型管理</h3>
+
+<!--表格顶部工具栏-->
+<form id="frmQuery" class="form-query form-inline">
+    <input type="hidden" name="_" value="{ $_api.base }" />
+    <a class="btn btn-primary btn-sm" href="index.php?_=user_type::add">
+        <i class="fa fa-plus-circle"></i> 添加
+    </a>
+
+    <!--表格工具-->
+    <div class="table-tool btn-toolbar">
+        <div class="btn-group btn-group-sm" role="group">
+            <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="刷新数据"><i class="fa fa-refresh"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="表格打印"><i class="fa fa-print"></i></button>
+            <button type="button" class="btn btn-secondary" data-toggle="tooltip" title="导出EXCEL"><i class="fa fa-external-link"></i></button>
+
+            <div class="btn-group btn-group-sm" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item active" href="#"><i class="fa fa-check"></i> ID编号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 添加时间 <i class="fa fa-long-arrow-up"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-down"></i></a>
+                <a class="dropdown-item" href="#"><i class="fa"></i> 账号 <i class="fa fa-long-arrow-up"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="tbListDiv">
+<table class="tbList fix-header" data-table="{ 'user_type'|z_code }">
+    <thead>
+        <tr>
+        <th>#</th>
+        <th>编号</th>
+        <th>名称</th>
+        <th>是否隐藏</th>
+        <th>权限</th>
+        <th>菜单</th>
+        <th>备注</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        { foreach $list as $r }
+        <tr data-id="{ $r.id|z_id:'user_type' }">
+        <td>{ $r.id }</td>
+        <td>{ $r.code }</td>
+        <td contenteditable="plaintext-only" data-field="{ 'name'|z_code }">{ $r.name }</td>
+        <td>{ if $r.is_hide == 1 }隐藏{ else }显示{ /if }</td>
+        <td>{ $r.power_count }</td>
+        <td>{ $r.menu_count }</td>
+        <td>{ $r.memo }</td>
+        <td>{ $r.add_time }</td>
+        <td class="td-btn">
+            { if $r.id != 1 }
+            { z_btn_edit url='index.php?_=user_type::edit' title="编辑用户" size="600px, 560px" }
+            { z_btn_del url='index.php?_=user_type::delete' }
+            { /if }
+        </td>
+        </tr>
+        { /foreach }
+    </tbody>
+</table>
+</div>
+
+{ include '../main_bottom.html' }

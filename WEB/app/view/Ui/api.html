@@ -1,0 +1,149 @@
+{ include '../main_top.html' }
+
+<script>
+Z.config.navMenuId = 'NavMenu_ui_api';
+</script>
+<link href="https://lib.baomitu.com/highlight.js/9.15.10/styles/default.min.css" rel="stylesheet">
+<script src="https://lib.baomitu.com/highlight.js/9.15.10/highlight.min.js"></script>
+
+<h3>API类</h3>
+<ul>
+    <li>在 <code>app/api</code> 目录中添加</li>
+    <li>继承自 <code>zphp\ApiBase</code></li>
+    <li>API必须方法必须为 <code>static</code></li>
+    <li>必须有返回 <code>self::_success()</code> 或 <code>self::_error('错误信息');</code></li>
+    <li>API编写完成后，在API文档中生成API接口后，方可调用</li>
+    <li>WebAPI调用方法：<code>http://localhost/index.php?_=sys::index</code> sys为API类名，index为方法名</li>
+    <li>设备API调用方法：<code>http://localhost/api.php?_=sys::index</code> sys为API类名，index为方法名</li>
+</ul>
+<pre><code class="php">
+namespace app\api;
+
+use zphp\ApiBase;
+
+/**
+ * API类名称
+ */
+class Client extends ApiBase
+{
+    // 是否需要登录，默认需要登录
+    protected static $need_login = true;
+
+    /**
+     * 首页
+     *
+     * @param int id
+     */
+    public static function index($params = [])
+    {
+        // 处理过程
+        $id = $params['id'];
+        if (empty($id))
+        {
+            return self::_error('ID为空');
+        }
+
+        return self::_success();
+    }
+}
+</code></pre>
+
+<h3>API参数</h3>
+<ul>
+    <li><code>int</code> 整数</li>
+    <li><code>string</code> 字符串</li>
+    <li><code>float</code> 浮点数</li>
+    <li><code>date</code> 日期（默认值：today 当前日期）</li>
+    <li><code>time</code> 时间（默认值：now 当前时间）</li>
+    <li><code>any</code> 任意类型</li>
+    <li><code>json</code> JSON字符串</li>
+    <li><code>array</code> 键值对、列表（或已逗号分割字符串）</li>
+    <li><code>array_int</code> 列表（整数）</li>
+    <li><code>code</code> 编号（字段、表名等，安全字符串）</li>
+    <li><code>id</code> 加验证的ID</li>
+</ul>
+<pre><code class="php">
+/**
+ * API名称
+ * API注释内容
+ *
+ * @author 作者
+ * @date 2019-10-19
+ * 
+ * @param id id ID编号 [0] client
+ * @param string +name 名称
+ * @param int +status 状态
+ * @param int +client_type 客户类型
+ * @param float +money 金额 [0]
+ * @param array ext 扩展属性
+ * @param string memo 备注
+ *
+ * @return 返回值类型
+ */
+public static function save($params)
+{
+    // 处理
+    $data = [
+        'name' => $params['name'],
+    ];
+
+    return self::_success($data);
+}
+</code></pre>
+
+<h3>操作返回JSON</h3>
+<pre><code class="js">
+// 成功返回
+{
+    result: 1,  // 1:成功
+    data: null, // 返回数据
+    url: '',    // 页面自动跳转
+    reload: false, // 刷新本页
+}
+
+// 失败返回
+{
+    result: 0,      // 非1:失败
+    error: '...',   // 错误信息
+    exception: $ex, // 异常详情
+}
+</code></pre>
+
+<h3>操作失败/错误/异常时返回值</h3>
+<pre><code class="php">
+return self::_error('操作失败');
+
+// 自定义错误编号不允许 = 1
+return self::_error('操作失败', 3);
+</code></pre>
+
+<h3>成功返回</h3>
+<pre><code class="php">
+// {result:1, data:null}
+return self::_success();
+
+$data = [
+    'list' => $list,
+    'type_list' => $type_list,
+];
+return self::_success($data);
+
+// PHP页面跳转
+return self::_success(true, ['url' => 'location:/index.php?_=dev::run']);
+
+// 页面刷新
+return self::_success(true, ['reload' => true]);
+
+// 自定义view模板
+return self::_success(true, ['view' => 'add']);
+
+// JS页面跳转
+return self::_success(true, ['url' => '/index.php?_=dev::run']);
+
+// 强制退出，输出文本格式
+return self::_exit();
+</code></pre>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+{ include '../main_bottom.html' }

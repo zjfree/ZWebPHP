@@ -1,0 +1,110 @@
+{ include '../main_top.html' }
+
+<script>
+    Z.config.navMenuId = 'NavMenu_ui_table_table2';
+</script>
+
+<h3>表格大数据 1万数据</h3>
+
+<script>
+$(function(){
+    var max_height = $(window).height();
+    var table_height = $('#tb1').outerHeight();
+    //var top = 60;
+    var top = $('#tb1').offset().top + 10;
+    var tr_height = $('#tb1 tbody tr').eq(0).addClass('tr-show').outerHeight();
+    var tr_show_count = Math.floor((max_height - top - table_height) / tr_height);
+    var height = table_height + tr_show_count * tr_height;
+    $('.tbListBigDiv').css('height', height);
+    var max_height = table_height + $('#tb1 tbody tr').length * tr_height;
+    $('.tbListBigDiv').append('<div style="height:' + max_height + 'px;"></div>')
+
+    var i = 0;
+    $('#tb1 tbody tr').each(function(){
+        if (i++ < tr_show_count)
+        {
+            $(this).addClass('tr-show');
+        }
+    });
+
+    $('.tbListBigDiv').scroll(Z.throttle(function(){
+        console.time('scroll');
+        var top = $('.tbListBigDiv').scrollTop();
+        top = Math.min(max_height - height, top);
+        $('.tbListBigDiv').find('.tbList').css('top', '' + top + 'px');
+
+        var showIndex = Math.floor(top / tr_height);
+        $('#tb1 tbody>.tr-show').removeClass('tr-show');
+        $('#tb1 tbody>tr').slice(showIndex, showIndex + tr_show_count).addClass('tr-show');
+        console.timeEnd('scroll');
+        console.count('scroll');
+    }, 100));
+
+});
+</script>
+<style>
+.tbListBigDiv{
+    width:100%; overflow-y:auto;
+    margin-bottom:10px;
+    height:600px;
+    position: relative;
+}
+.tbListBigDiv .tbList{
+    margin-bottom:0;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.tbListBigDiv tbody tr{
+    display:none;
+}
+.tbListBigDiv tbody .tr-show{
+    display:table-row;
+}
+</style>
+<div class="tbListBigDiv">
+<table id="tb1" class="tbList" data-table="table1">
+    <thead>
+        <tr>
+        <th><input class="chkAll" type="checkbox" /></th>
+        <th>#</th>
+        <th>名称&uarr;</th>
+        <th>价格&darr;</th>
+        <th>上市</th>
+        <th>状态</th>
+        <th>添加时间</th>
+        <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        { $i =0 }
+        { section name=total loop=10000 }
+        { $i = $i + 1 }
+        <tr data-id="<?=$i?>">
+        <td><input type="checkbox" /></td>
+        <td>{ $i }</td>
+        <td>诺基亚5230XM</td>
+        <td>{ math equation=rand(700,900) }-{ math equation=rand(1000,2000) }元</td>
+        <td>{ math equation=rand(2000,2020) }年</td>
+        <td class="z-status">
+            <span class="">启动</span><span class="active">禁用</span>
+        </td>
+        <td>{ math equation=rand(2000,2020) }-10-10</td>
+        <td>
+            <a href="#">编辑</a>
+            <a href="#">删除</a>
+        </td>
+        </tr>
+        { /section }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <span class="foot-info">共10000条</span>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+</div>
+
+{ include '../main_bottom.html' }

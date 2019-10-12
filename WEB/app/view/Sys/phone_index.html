@@ -1,0 +1,51 @@
+{ include '../page_top.html' }
+
+    <div style="background:#000; color:#fff;">
+        <a class="navbar-brand" href="#">
+            <img src="./static/img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="LOGO">
+            <span style="font-size:16px;">{ $sys_name|default:$_sys.sys_name }</span>
+        </a>
+    </div>
+
+    <div style="margin:0 10px;">
+        当前用户：{ $_user.name }
+        <br>
+        <a class="btn btn-sm btn-primary" href="/index.php?_=my"><i class="fa fa-user"></i> 用户信息</a>
+        <a class="btn btn-sm btn-primary" href="/index.php?_=my::passwd"><i class="fa fa-key"></i> 修改密码</a>
+        <a class="btn btn-sm btn-warning" href="/index.php?_=User::logout"><i class="fa fa-sign-out"></i> 安全退出</a>
+    </div>
+
+    <!--系统导航菜单-->
+    <nav id="divMainMenu" class="nav-menu" style="position:static; width:100%; margin:10px 0;">
+        <a id="NavMenu_index" href="index.php"><i class="fa fa-home"></i> 首页</a>
+        { V::formatMenu($_user.menu_list) }
+    </nav>
+    
+    <style>
+    #divMainMenu .level-1, #divMainMenu>a
+    {
+        clear: both;
+    }
+    #divMainMenu .level-2
+    {
+        display: block;
+    }
+    
+    #divMainMenu .level-2::after
+    {
+        content: '';
+        display: block;
+        clear: both;
+        height: 5px;
+    }
+    
+    #divMainMenu .level-2 a {    
+        display: inline-block;
+        width: 150px;
+        margin: 3px 0;
+        padding: 5px;
+        margin-left: 10px;
+    }
+    </style>
+
+{ include '../page_top.html' }
