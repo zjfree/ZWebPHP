@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<title>文件管理</title>
+<style>
+body{
+    font-family: consolas, 'Courier New', Courier, monospace;
+}
+</style>
+<script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <div><?=$cur_path?></div>
+    <table>
+        <tr>
+            <td></td>
+            <td><a href='zfile.php?path=<?=$pre_path ?>'>..</a></td>
+            <td></td>
+        </tr>
+        <?php foreach ($list as $r) { ?>
+            <tr>
+                <td><?=filetype($r)?></td>
+                <td><a href='zfile.php?path=<?=$cur_path ?><?=DS.basename($r)?>'><?=basename($r)?></a></td>
+                <td><?=round(filesize($r)/1024)?>k</td>
+            </tr>
+        <?php } ?>
+    </table>
+</body>
