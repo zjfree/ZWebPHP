@@ -231,7 +231,7 @@ class User
 		$user = self::current();
 		if (!empty($user))
 		{
-			$timespan = Tool::timespanFormat(time() - strtotime($user['login_time']));
+			$timespan = Tool::timespanFormat(Tool::strtotime() - Tool::strtotime($user['login_time']));
 			$str_log = '用户【' . $user['name'] . ' ' . $user['account'] . '】退出 在线时长 ' . $timespan;
 			Log::add($str_log, '用户退出');
 

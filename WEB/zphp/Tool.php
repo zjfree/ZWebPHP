@@ -44,7 +44,7 @@ class Tool
      */
 	public static function now()
 	{
-		return date('Y-m-d H:i:s');
+		return Tool::date('Y-m-d H:i:s');
 	}
 	
     /**
@@ -374,11 +374,50 @@ class Tool
 	 */
 	public static function addDay($dt, $span)
 	{
-		$dt = strtotime($dt);
+		$dt = Tool::strtotime($dt);
 
 		$dt += $span * 3600 * 24;
 
-		return date('Y-m-d', $dt);
+		return Tool::date('Y-m-d', $dt);
+	}
+
+	/**
+	 * 替换系统 strtotime, Y2K38问题
+	 */
+	public static function strtotime($dt = null, $modify = '')
+	{
+		$d = null;
+		if (empty($dt))
+		{
+			$d = new \DateTime();
+		}
+		else if (\is_numeric($dt))
+		{
+			$d = new \DateTime('@' . $dt);
+		}
+		else
+		{
+			$d = new \DateTime($dt);
+		}
+
+		$d -> setTimeZone(new \DateTimeZone('PRC'));
+		if ($modify != '')
+		{
+			$d -> modify($modify);
+		}
+
+		return $d -> format('U');
+	}
+
+	/**
+	 * 替换系统 date, Y2K38问题
+	 */
+	public static function date($format = 'Y-m-d H:i:s', $dt = null)
+	{
+		$d = new \DateTime('@' . Tool::strtotime($dt));
+		$d -> setTimeZone(new \DateTimeZone('PRC'));
+
+		return $d -> format($format);
 	}
 
 	/**

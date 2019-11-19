@@ -188,20 +188,20 @@ class SmartyPlugin
 	/// 日期输出
 	public static function modifier_dt($time)
 	{
-		$t = strtotime($time);
-		if (empty($time) || $t == strtotime('2000-01-01'))
+		$t = Tool::strtotime($time);
+		if (empty($time) || $t == Tool::strtotime('2000-01-01'))
 		{
 			return '-';
 		}
 
-		return date('Y-m-d', $t);
+		return Tool::date('Y-m-d', $t);
 	}
 
 	/// 时间输出
 	public static function modifier_date_time($time)
 	{
-		$t = strtotime($time);
-		if ($t == strtotime('2000-01-01'))
+		$t = Tool::strtotime($time);
+		if ($t == Tool::strtotime('2000-01-01'))
 		{
 			return '-';
 		}
@@ -212,20 +212,20 @@ class SmartyPlugin
 	/// 时间输出
 	public static function modifier_time($time)
 	{
-		$t = strtotime($time);
-		if ($t == strtotime('2000-01-01'))
+		$t = Tool::strtotime($time);
+		if ($t == Tool::strtotime('2000-01-01'))
 		{
 			return '-';
 		}
 
-		$day = strtotime(date('Y-m-d'));
+		$day = Tool::strtotime(date('Y-m-d'));
 		if ($t > $day)
 		{
-			return '今天 ' . date('H:i:s', $t);
+			return '今天 ' . Tool::date('H:i:s', $t);
 		}
 		else if ($t > $day - 3600*24)
 		{
-			return '昨天 ' . date('H:i:s', $t);
+			return '昨天 ' . Tool::date('H:i:s', $t);
 		}
 
 		return $time;

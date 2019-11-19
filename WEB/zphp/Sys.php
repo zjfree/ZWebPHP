@@ -498,7 +498,7 @@ class Sys
 						}
 						else
 						{
-							$val = $val == 'today' ? date('Y-m-d') : date('Y-m-d', strtotime($val));
+							$val = $val == 'today' ? Tool::date('Y-m-d') : Tool::date('Y-m-d', Tool::strtotime($val));
 						}
 						break;
 					case 'time':
@@ -508,7 +508,7 @@ class Sys
 						}
 						else
 						{
-							$val = $val == 'now' ? date('Y-m-d H:i:s') : date('Y-m-d H:i:s', strtotime($val));
+							$val = $val == 'now' ? Tool::date('Y-m-d H:i:s') : Tool::date('Y-m-d H:i:s', Tool::strtotime($val));
 						}
 						break;
 					case 'json':

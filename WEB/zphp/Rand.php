@@ -57,11 +57,11 @@ class Rand
 	// 时间
 	public static function time($begin = '2000-01-01', $end = null)
 	{
-		$begin = strtotime($begin);
-		$end = $end === null ? time() : strtotime($end);
+		$begin = Tool::strtotime($begin);
+		$end = $end === null ? time() : Tool::strtotime($end);
 
 		$res = mt_rand($begin, $end);
-		$res = date('Y-m-d H:i:s', $res);
+		$res = Tool::date('Y-m-d H:i:s', $res);
 
 		return $res;
 	}
@@ -69,11 +69,11 @@ class Rand
 	// 日期
 	public static function date($begin = '2000-01-01', $end = null)
 	{
-		$begin = strtotime($begin);
-		$end = $end === null ? time() : strtotime($end . ' 23:59:59');
+		$begin = Tool::strtotime($begin);
+		$end = $end === null ? time() : Tool::strtotime($end . ' 23:59:59');
 
 		$res = mt_rand($begin, $end);
-		$res = date('Y-m-d', $res);
+		$res = Tool::date('Y-m-d', $res);
 
 		return $res;
 	}
