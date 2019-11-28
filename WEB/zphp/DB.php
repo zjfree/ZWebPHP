@@ -657,7 +657,8 @@ class DB
         if (count($list) == 0) return 0;
 
         // 获取字段
-		$insert_fields = array_keys($list[0]);
+        $insert_fields = array_keys($list[0]);
+        $insert_fields = array_map('trim', $insert_fields);
 		
 		$chunk_list = array_chunk($list, 500);
 		foreach ($chunk_list as $patch)
@@ -910,5 +911,22 @@ class DB
             -> select();
 
         return [$count, $list];
+    }
+
+	/**
+     * 表是否存在
+     */
+    public function tableExist()
+    {
+        $sql = 'SHOW TABLES LIKE \'' . $this -> table . '\'';
+
+        $res = $this -> call_sql($sql);
+
+        if (empty($res))
+        {
+            return false;
+        }
+
+        return true;
     }
 }
