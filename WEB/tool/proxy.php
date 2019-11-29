@@ -1,6 +1,6 @@
 <?php 
 
-$url = @$_GET['url'] ?: '';
+$url = @$_SERVER['QUERY_STRING'] ?: '';
 if (empty($url))
 {
 	exit('ERROR:url is null!');
@@ -13,7 +13,8 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url); 
 
 //return the transfer as a string 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 
 curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 
