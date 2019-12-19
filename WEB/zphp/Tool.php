@@ -121,7 +121,7 @@ class Tool
 	public static function guid_short()
 	{
 		$s = md5(uniqid(mt_rand(), true), true);
-		$s = urlsafe_b64encode($s);
+		$s = self::urlsafe_b64encode($s);
 
 		return $s;
 	}
@@ -530,7 +530,7 @@ class Tool
             $html = curl_exec($ch);
             curl_close($ch);
         }
-        catch (Exception $ex)
+        catch (\Exception $ex)
         {
 			$html = null;
         }
