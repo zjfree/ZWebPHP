@@ -123,7 +123,7 @@ class Sys
         $smarty->compile_dir = ROOT_PATH . 'runtime/smarty/templates_c/';; //设置编译目录 ——混编文件，自动生成
         $smarty->cache_dir = ROOT_PATH . 'runtime/smarty/cache/'; //缓存目录
         $smarty->cache_lifetime = 0; //缓存时间
-        $smarty->caching = true; //缓存方式
+        $smarty->caching = false; //缓存方式   smarty缓存会导致 cookie\request 互串！！！！！！！！！！！！！！！！！
         $smarty->left_delimiter = '{ ';
         $smarty->right_delimiter = ' }';
         
