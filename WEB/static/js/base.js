@@ -563,6 +563,17 @@ var Z = {
             });
         }
 
+        // 表格内部滚动条
+        Z.tbResize();
+        $('.divTbScroll').scroll(function(){
+            Z.tbScroll(this);
+        });
+        $('.divTbScroll').each(function(){
+            Z.tbScroll(this);
+        });
+
+        $(window).resize(Z.tbResize);
+
         console.timeEnd("JS启动时间");
     },
 
@@ -999,5 +1010,39 @@ var Z = {
 		
 		var uri = 'data:application/vnd.ms-excel;base64,' + html;
 		window.location.href = uri;
-	},
+    },
+    
+    // 表格内部滚动条
+    tbScroll:function(o)
+    {
+        let scrollTop = o.scrollTop;
+        if (scrollTop == 0)
+        {
+            o.querySelector('thead').style.transform = '';
+        }
+        else
+        {
+            o.querySelector('thead').style.transform = 'translateY(' + (scrollTop - 1) + 'px)';
+        }
+
+        let h = $(o).find('.tbList').height() - $(o).height() - scrollTop;
+        let scrollbarHeight = o.offsetHeight - o.clientHeight;
+        h = 0-h-scrollbarHeight;
+        o.querySelector('tfoot').style.transform = 'translateY(' + h + 'px)';
+    },
+
+    tbResize:function()
+    {
+        let winHeight = $(window).height();
+        $('.divTbScroll').each(function(){
+            let h = $(this).find('.tbList').height();
+            if (h + $(this).offset().top > winHeight)
+            {
+                h = winHeight - $(this).offset().top - 10;
+            }
+
+            $(this).css('height', h + 'px');
+            Z.tbScroll(this);
+        });
+    }
 };

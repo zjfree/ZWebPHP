@@ -82,6 +82,7 @@ label{
     margin-top:0;
     padding-top:60px;
     position: relative;
+    margin-bottom:0;
 }
 
 .z-breadcrumb .breadcrumb{
@@ -150,35 +151,44 @@ label{
 /* 表格样式 */
 .tbList{
     min-width:100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-    border:solid 2px #ddd;
+    border: solid 2px #ccc;
     background:#fff;
     color:#333;
     font-size:14px;
     margin-bottom:10px;
+    border-collapse: collapse;
     font-family: consolas, 'Courier New', 微软雅黑, Courier, monospace;
 }
 .tbList th{
+    background-color: #dedede;
+    background: linear-gradient(to bottom, #d5d5d5 0%,#fff 100%);
     font-weight: normal;
-    background: #f0f0f0;
 }
 .tbList td, .tbList th{
-    border:solid 1px #ddd;
+    border: solid 1px #ccc;
     padding:3px 10px;
     text-align: center;
     vertical-align: text-top;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    white-space:nowrap;
 }
 .tbList.center tbody td, .tbList.center thead th {
     text-align: center;
 }
 .tbList tbody tr:hover td{
-    border-bottom:solid 1px #999;
+    border-bottom:solid 1px #aaf;
 }
-.tbList tfoot td{
+.tbList tfoot td {
+    background-color: #dedede;
+    background: linear-gradient(to bottom, #fff 0%,#d5d5d5 100%);
     text-align: left;
-    padding:5px 10px;
+}
+.tbList .cut{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space:nowrap;
+    width:300px;
+    text-align:left;
 }
 
 .tbList.big th{
@@ -221,6 +231,7 @@ label{
     float: right;
     line-height: 1.3;
     display: none;
+    background: #fff;
 }
 .tbList .page a, .tbList .page span{
     border-left:solid 1px #ddd;
@@ -265,6 +276,15 @@ label{
     line-height: 1.5;
     vertical-align: text-bottom;
     margin-bottom: 2px;
+}
+
+.divTbScroll{
+    overflow:auto;
+    border-top:solid 1px #ccc;
+    border-bottom:solid 1px #ccc;
+}
+.divTbScroll .tbList{
+    margin-bottom: 0;
 }
 
 /* 导航菜单样式 */
