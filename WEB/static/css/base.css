@@ -161,7 +161,7 @@ label{
 }
 .tbList th{
     background-color: #dedede;
-    background: linear-gradient(to bottom, #d5d5d5 0%,#fff 100%);
+    background: linear-gradient(to bottom, #ccc 0%,#eee 100%);
     font-weight: normal;
 }
 .tbList td, .tbList th{
@@ -179,7 +179,7 @@ label{
 }
 .tbList tfoot td {
     background-color: #dedede;
-    background: linear-gradient(to bottom, #fff 0%,#d5d5d5 100%);
+    background: linear-gradient(to bottom, #eee 0%,#ccc 100%);
     text-align: left;
 }
 .tbList .cut{
