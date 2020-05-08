@@ -24,13 +24,21 @@ class LocalService extends ApiBase
 
 		// 限制本机访问、超级管理员访问
 		$ip = Tool::ip();
-		$user = User::current();
-		if ($ip != '127.0.0.1' && $ip != '::1' && $user['id'] != 1)
+		$server_ip = $_SERVER['SERVER_ADDR'];
+		$host_ip = gethostbyname($_SERVER['HTTP_HOST']);
+		
+		if (in_array($ip, ['127.0.0.1', '::1', $server_ip, $host_ip]))
 		{
-			return self::_error('无权限 ' . $ip);
+			return self::_success();
+		}
+		
+		$user = User::current();
+		if ($user != null && $user['id'] == 1)
+		{
+			return self::_success();
         }
-        
-        return self::_success();
+		
+		return self::_error('无权限 ' . $ip);
     }
 
 	/**
