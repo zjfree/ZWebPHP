@@ -315,7 +315,7 @@ var Z = {
         });
 
         // 生成分页代码
-        $('.tbList tfoot .page').each(function(){
+        $('.tbList tfoot .page, .phone-card-page .page').each(function(){
             var $form = $(this).data('form');
             var $total = $(this).data('total');
             var $pageSize = $(this).data('page-size');
@@ -352,7 +352,7 @@ var Z = {
         $('.td-btn a[title]').tooltip();
         
         // 删除按钮处理
-        $('.tbList a.btn-del').click(function(){
+        $('.tbList a.btn-del, .phone-card-btn a.btn-del').click(function(){
             $(this).tooltip('hide');
             var btn = this;
             Z.confirm('确认删除吗？', function(){
@@ -362,14 +362,14 @@ var Z = {
         });
         
         // ajax操作确认
-        $('.tbList a.btn-ajax').click(function(){
+        $('.tbList a.btn-ajax, .phone-card-btn a.btn-ajax').click(function(){
             var btn = this;
             var str = $(this).attr('title') || '确认执行此操作吗？';
             Z.confirm(str, function(){
                 Z.ajax({
                     url:$(btn).attr('href'),
                     data:{
-                        id:$(btn).parents('tr').eq(0).data('id'),
+                        id:$(btn).parents('.phone-card-item').eq(0).data('id') || $(btn).parents('tr').eq(0).data('id'),
                     },
                 });
             });
@@ -377,9 +377,9 @@ var Z = {
         });
         
         // 编辑按钮处理
-        $('.tbList a.btn-edit').each(function(){
+        $('.tbList a.btn-edit, .phone-card-btn a.btn-edit').each(function(){
             var url = $(this).attr('href');
-            var id = $(this).parents('tr').eq(0).data('id');
+            var id = $(this).parents('.phone-card-item').eq(0).data('id') || $(this).parents('tr').eq(0).data('id');
             if (url.indexOf('?') === -1)
             {
                 url += '?id=' + id;
@@ -392,9 +392,9 @@ var Z = {
         });
 
         // 编辑按钮处理
-        $('.tbList a.btn-frame-edit').each(function(){
+        $('.tbList a.btn-frame-edit, .phone-card-btn a.btn-frame-edit').each(function(){
             var url = $(this).attr('href');
-            var id = $(this).parents('tr').eq(0).data('id');
+            var id = $(this).parents('.phone-card-item').eq(0).data('id') || $(this).parents('tr').eq(0).data('id');
             if (url.indexOf('?') === -1)
             {
                 url += '?id=' + id;
@@ -571,6 +571,14 @@ var Z = {
         $('.divTbScroll').each(function(){
             Z.tbScroll(this);
         });
+        
+        // 手机CARD展开
+        $('.phone-card-item').click(function(){
+            if ($(this).hasClass('active')) return;
+
+            $('.phone-card-item').removeClass('active');
+            $(this).addClass('active');
+        });
 
         $(window).resize(Z.tbResize);
 
@@ -601,7 +609,7 @@ var Z = {
             return;
         }
 
-        var id = $(o).data('id') || $(o).parents('tr').eq(0).data('id');
+        var id = $(o).data('id') || $(o).parents('.phone-card-item').eq(0).data('id') || $(o).parents('tr').eq(0).data('id');
         var data = {};
         if (id)
         {
@@ -612,7 +620,14 @@ var Z = {
             url:url,
             data:data,
             success:function(){
-                $(o).parents('tr').eq(0).remove();
+                if ($(o).parents('.phone-card-item').length > 1)
+                {
+                    $(o).parents('.phone-card-item').eq(0).remove();
+                }
+                else
+                {
+                    $(o).parents('tr').eq(0).remove();
+                }
             }
         });
     },

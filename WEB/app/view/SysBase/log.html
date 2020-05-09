@@ -49,6 +49,7 @@
     </div>
 </form>
 
+{ if $_sys.browser == 'pc' }
 <div class="tbListDiv">
 <table id="tb1" class="tbList fix-header">
     <thead>
@@ -84,5 +85,25 @@
     </tfoot>
 </table>
 </div>
+{ else if $_sys.browser == 'mobile' }
+<div class="phone-card-list">
+    { foreach $list as $r }
+    <div class="phone-card-item" data-id="{ $r.id|z_id:'user' }">
+    <div class="phone-card-content">
+    时间：{ $r.add_time }<br>
+    用户：{ $r.user_name } { $r.user_type }<br>
+    类型：{ $r.type }<br>
+    <hr>
+    { $r.content|nl2br }<br>
+    </div>
+    </div>
+    { /foreach }
+</div>
+<div class="phone-card-page">
+    <span>共{ $count }条</span>
+    <span class="page" data-form="frmQuery" data-total="{ $count }" data-page="{ $page }" data-page-size="30">
+    </span>
+</div>
+{ /if }
 
 { include '../main_bottom.html' }

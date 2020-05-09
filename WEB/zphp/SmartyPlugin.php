@@ -54,7 +54,12 @@ class SmartyPlugin
 	public static function function_btn_del($params, $template)
 	{
 		$url = @$params['url'] ?: '';
-		$html = '<a href="' . $url . '" class="btn-del" data-toggle="tooltip" title="删除"><i class="fa fa-close"></i></a>';
+		$txt = @$params['txt'] ?: '';
+		if (!empty($txt))
+		{
+			$txt = ' ' . trim($txt);
+		}
+		$html = '<a href="' . $url . '" class="btn-del" data-toggle="tooltip" title="删除"><i class="fa fa-close"></i>' . $txt . '</a>';
         
 		return $html;
 	}
@@ -63,7 +68,12 @@ class SmartyPlugin
 	public static function function_btn_edit($params, $template)
 	{
 		$url = @$params['url'] ?: '';
-		$html = '<a href="' . $url . '" class="btn-edit" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i></a>';
+		$txt = @$params['txt'] ?: '';
+		if (!empty($txt))
+		{
+			$txt = ' ' . trim($txt);
+		}
+		$html = '<a href="' . $url . '" class="btn-edit" data-toggle="tooltip" title="编辑"><i class="fa fa-edit"></i>' . $txt . '</a>';
         
 		return $html;
     }
@@ -74,7 +84,12 @@ class SmartyPlugin
 		$url = @$params['url'] ?: '';
 		$size = @$params['size'] ?: '';
 		$title = @$params['title'] ?: '编辑';
-		$html = '<a href="' . $url . '" class="btn-frame-edit" data-frame-size="' . $size . '" data-toggle="tooltip" title="' . $title . '"><i class="fa fa-edit"></i></a>';
+		$txt = @$params['txt'] ?: '';
+		if (!empty($txt))
+		{
+			$txt = ' ' . trim($txt);
+		}
+		$html = '<a href="' . $url . '" class="btn-frame-edit" data-frame-size="' . $size . '" data-toggle="tooltip" title="' . $title . '"><i class="fa fa-edit"></i>' . $txt . '</a>';
 
 		return $html;
 	}

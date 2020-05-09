@@ -48,6 +48,7 @@
     </div>
 </form>
 
+{ if $_sys.browser == 'pc' }
 <div class="tbListDiv">
 <table class="tbList fix-header">
     <thead>
@@ -91,5 +92,31 @@
     </tbody>
 </table>
 </div>
+{ else if $_sys.browser == 'mobile' }
+<div class="phone-card-list">
+    { foreach $user_list as $r }
+    <div class="phone-card-item" data-id="{ $r.id|z_id:'user' }">
+    <div class="phone-card-content">
+    <i class="fa fa-user"></i> { $r.name } ({ $r.account })<br>
+    <span class="line50">类型：{ $r.user_type_id|z_id_name:'user_type' }</span>
+    状态：{ $r.status|z_enum_format:'status' }
+    <div class="more">
+    手机：{ $r.phone }<br>
+    邮箱：{ $r.email }<br>
+    微信：{ $r.weixin }<br>
+    添加时间：{ $r.add_time }
+    </div>
+    </div>
+    { if $r.id != 1 }
+    <div class="phone-card-btn">
+        { z_btn_frame_edit url='index.php?_=user_manage::edit' title="编辑用户" size="600px, 580px" txt='编辑' }
+        { z_btn_del url='index.php?_=user_manage::delete' txt='删除' }
+    </div>
+    { /if }
+    </div>
+    { /foreach }
+</div>
+
+{ /if }
 
 { include '../main_bottom.html' }
