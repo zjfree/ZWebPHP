@@ -8,7 +8,7 @@
     </div>
 
     <div style="margin:0 10px;">
-        当前用户：{ $_user.name }
+        <i class="fa fa-user"></i> 当前用户：{ $_user.name }
         <br>
         <a class="btn btn-sm btn-primary" href="/index.php?_=my"><i class="fa fa-user"></i> 用户信息</a>
         <a class="btn btn-sm btn-primary" href="/index.php?_=my::passwd"><i class="fa fa-key"></i> 修改密码</a>
@@ -16,36 +16,86 @@
     </div>
 
     <!--系统导航菜单-->
-    <nav id="divMainMenu" class="nav-menu" style="position:static; width:100%; margin:10px 0;">
-        <a id="NavMenu_index" href="index.php"><i class="fa fa-home"></i> 首页</a>
-        { V::formatMenu($_user.menu_list) }
-    </nav>
-    
     <style>
-    #divMainMenu .level-1, #divMainMenu>a
-    {
-        clear: both;
-    }
-    #divMainMenu .level-2
-    {
-        display: block;
-    }
-    
-    #divMainMenu .level-2::after
-    {
-        content: '';
-        display: block;
-        clear: both;
-        height: 5px;
-    }
-    
-    #divMainMenu .level-2 a {    
-        display: inline-block;
-        width: 150px;
-        margin: 3px 0;
-        padding: 5px;
-        margin-left: 10px;
-    }
+        #divPhoneMenu{
+            margin:10px;
+        }
+        #divPhoneMenu a{
+            float: left;
+            width:100px;
+            text-align: center;
+            margin-bottom:10px;
+            margin-right:10px;
+            padding:10px 5px;
+            border-radius: 10px;
+            background: #0093B5;
+            background: linear-gradient(to bottom, #0053BF, #0093B5);
+            color:#fff;
+            height:80px;
+            overflow: hidden;
+        }
+        #divPhoneMenu a i{
+            font-size:35px;
+        }
+        #divPhoneMenu a span{
+            display: block;
+            font-size:14px;
+            margin-top:5px;
+        }
+        #divPhoneMenu .level-1{
+            clear: both;
+        }
+        #divPhoneMenu .level-2{
+            clear: both;
+            background: linear-gradient(to bottom, #fff, #ddd);
+            border-radius: 5px;
+            border:solid 1px #aaa;
+            margin-bottom: 10px;
+        }
+        #divPhoneMenu .level-2 a{
+            width:95px;
+        }
+        #divPhoneMenu .level-2 .sub-name{
+            clear: both;
+            background: linear-gradient(to bottom, #666, #333);
+            margin-bottom:10px;
+            padding:5px;
+            color:#fff;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        #divPhoneMenu .level-2 .sub-list{
+            padding:0 10px;
+        }
+        #divPhoneMenu .level-2 .sub-end{
+            clear: both;
+        }
+
     </style>
+
+    <hr>
+    <div id="divPhoneMenu">
+        <a href="index.php"><i class="fa fa-home"></i> <span>首页</span></a>
+        { if  V::hasPower('Subject.edit') }
+        <a href="/index.php?_=big_data::phone" target="_blank"><i class="fa fa-line-chart"></i> <span>手机看板</span></a>
+        { /if }
+        <div class="level-1">
+        { foreach $_user.menu_list as $r }
+            { if empty($r.list) }
+            <a href="{ $r.href }" target="{ $r.target }"><i class="{ $r.icon }"></i> <span>{ $r.name }</span></a>
+            { else }
+            <div class="level-2">
+                <div class="sub-name"><i class="{ $r.icon }"></i> <span>{ $r.name }</span></div>
+                <div class="sub-list">
+                    { foreach $r.list as $rr }
+                    <a href="{ $rr.href }" target="{ $rr.target }"><i class="{ $rr.icon }"></i> <span>{ $rr.name }</span></a>
+                    { /foreach }
+                </div>
+                <div class="sub-end"></div>
+            </div>
+            { /if }
+        { /foreach }
+        </div>
+    </div>
 
 { include '../page_top.html' }
