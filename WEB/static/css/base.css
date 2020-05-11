@@ -680,6 +680,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 
 .tb-form{
     font-size:14px;
+    min-width: 350px;
 }
 .tb-form th, .tb-form td{
     padding:5px 0;
@@ -709,14 +710,18 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 
 .tb-form input[type=text]{
-    width:250px;
+    max-width:250px;
 }
 .tb-form textarea{
+    max-width:500px; height:150px;
+}
+body.pc .tb-form textarea{
     width:500px; height:150px;
 }
 
 .tb-attr{
     font-size:14px;
+    min-width: 350px;
 }
 .tb-attr th, .tb-attr td{
     padding:3px 0;
