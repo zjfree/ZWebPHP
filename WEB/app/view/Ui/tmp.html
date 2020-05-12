@@ -4,6 +4,107 @@
     Z.config.navMenuId = 'NavMenu_ui_tmp';
 </script>
 
+<h1>HTML网页框架</h1>
+<h3>自动选择中</h3>
+<div>
+    <select name="user_type" data-select-val="3">
+        <option value="1">用户1</option>
+        <option value="2">用户2</option>
+        <option value="3">用户3</option>
+        <option value="4">用户4</option>
+    </select>
+</div>
+<div class="checked-active" data-checkbox-val="2,3">
+    <label><input type="checkbox" name="chk[]" value="1" /> 选项1</label>
+    <label class="active"><input type="checkbox" name="chk[]" value="2" /> 选项2</label>
+    <label><input type="checkbox" name="chk[]" value="3" /> 选项3</label>
+    <label><input type="checkbox" name="chk[]" value="4" /> 选项4</label>
+    <label><input type="checkbox" name="chk[]" value="5" /> 选项5</label>
+</div>
+<div class="checked-active" data-radio-val="2">
+    <label><input type="radio" name="r1" value="1" /> 选项1</label>
+    <label><input type="radio" name="r1" value="2" /> 选项2</label>
+    <label><input type="radio" name="r1" value="3" /> 选项3</label>
+    <label><input type="radio" name="r1" value="4" /> 选项4</label>
+    <label><input type="radio" name="r1" value="5" /> 选项5</label>
+</div>
+<div class="checked-active" data-radio-val="1">
+    <label style="color:#0c0;"><input type="radio" name="r2" value="1" /> 启动</label>
+    <label style="color:red;"><input type="radio" name="r2" value="0" /> 禁用</label>
+</div>
+
+<h3>弹出框</h3>
+<div>
+    <input type="button" value="提示" onclick="Z.alertMsg('hello world!');" />
+    <input type="button" value="提示信息" onclick="Z.alert('hello world!', '提示信息');" />
+    <input type="button" value="错误信息" onclick="Z.alertError('hello world!');" />
+    <input type="button" value="询问提示" onclick="Z.confirm('hello world!');" />
+    <input type="button" value="输入提示" onclick="Z.prompt('输入年龄：');" />
+    <input type="button" value="iframe" onclick="Z.alertFrame('http://www.baidu.com', '百度', ['1000px', '70%']);" />
+    <input type="button" value="提交日志" onclick="Z.addLog('log test, 测试, hello!');" />
+</div>
+
+<h3>弹出框</h3>
+<div>
+    abc <b data-toggle="tooltip" title="Tooltip on top">qwe</b> asdf
+</div>
+
+<h3>POST测试</h3>
+<form id="frm1" class="ajax-submit" method="POST" action="./tool/ajax.php" target="_blank">
+<input type="text" name="" placeholder="" /><br>
+<input type="text" name="123" placeholder="123" /><br>
+<input type="text" name="a" placeholder="a" /><br>
+<input type="text" name="b[]" placeholder="b[]" /><br>
+<input type="text" name="b[]" placeholder="b[]" /><br>
+<input type="text" name="c[]" placeholder="c[]" /><br>
+<input type="text" name="d[a1]" placeholder="d[a1]" /><br>
+<input type="text" name="d[a2]" placeholder="d[a2]" /><br>
+<input type="text" name="e" placeholder="e" /><br>
+<input type="text" name="e" placeholder="e" /><br>
+<select name="user_type" data-select-val="3" class="auto-submit">
+    <option value="1">用户1</option>
+    <option value="2">用户2</option>
+    <option value="3">用户3</option>
+    <option value="4">用户4</option>
+</select>
+<hr>
+<button type="submit">提交</button>
+</form>
+
+<h3>数据绑定</h3>
+<div data-bind-html="a1"></div>
+<div data-bind-html="a2"></div>
+<div data-bind-html="a3"></div>
+<div data-bind-html="o.oa1"></div>
+<div>
+    温度：<span data-bind-html="a4">0</span> ℃<br>
+    <input type="text" data-bind-val="v1" /> <span data-bind-html="v1"></span><br>
+    <select data-bind-val="v2">
+        <option value="1">option1</option>
+        <option value="2">option2</option>
+        <option value="3">option3</option>
+    </select><br>
+    <button onclick="bind();">绑定数据</button>
+</div>
+<script>
+function bind()
+{
+    var obj = {
+        a1:'a1a1',
+        a2:'a2a2',
+        a3:'a3a3',
+        a4:'a4a4',
+        v1:'v1v1',
+        v2:3,
+        o:{
+            oa1:'oa1_abc',
+        }
+    };
+
+    Z.bindData(obj);
+}
+</script>
+
 <h3>Form控件</h3>
 <form id="frm2" method="POST" action="./tool/post.php" target="_blank">
 隐藏框：<input type="hidden" name="id" value="123" /><br>
@@ -56,26 +157,174 @@
 <button type="reset">重置</button>
 </form>
 
-<h3>POST测试</h3>
-<form id="frm1" class="ajax-submit" method="POST" action="./tool/ajax.php" target="_blank">
-<input type="text" name="" placeholder="" /><br>
-<input type="text" name="123" placeholder="123" /><br>
-<input type="text" name="a" placeholder="a" /><br>
-<input type="text" name="b[]" placeholder="b[]" /><br>
-<input type="text" name="b[]" placeholder="b[]" /><br>
-<input type="text" name="c[]" placeholder="c[]" /><br>
-<input type="text" name="d[a1]" placeholder="d[a1]" /><br>
-<input type="text" name="d[a2]" placeholder="d[a2]" /><br>
-<input type="text" name="e" placeholder="e" /><br>
-<input type="text" name="e" placeholder="e" /><br>
-<select name="user_type" data-select-val="3" class="auto-submit">
-    <option value="1">用户1</option>
-    <option value="2">用户2</option>
-    <option value="3">用户3</option>
-    <option value="4">用户4</option>
-</select>
-<hr>
-<button type="submit">提交</button>
-</form>
+<h3>HTML5 控件</h3>
+<progress value="22" max="100"></progress>
+<meter value="52" min="0" max="100" low="20" high="80"></meter>
+<style>
+
+</style>
+<fieldset>
+    <legend>health information1</legend>
+    hello1
+</fieldset>
+<fieldset>
+    <legend>health information2</legend>
+    hello2
+</fieldset>
+
+<h3>TAB 控件</h3>
+<nav>
+<div class="nav nav-tabs">
+<a class="nav-item nav-link active" data-toggle="tab" href="#nav-home">Home</a>
+<a class="nav-item nav-link" data-toggle="tab" href="#nav-profile">Profile</a>
+<a class="nav-item nav-link" data-toggle="tab" href="#nav-contact">Contact</a>
+</div>
+</nav>
+<div class="tab-content">
+<div class="tab-pane active" id="nav-home">tab1 content</div>
+<div class="tab-pane " id="nav-profile">tab2 content</div>
+<div class="tab-pane " id="nav-contact">tab3 content</div>
+</div>
+
+<h3>加载中</h3>
+
+<button onclick="Z.loading(); window.setTimeout(function(){Z.loadingHide()}, 5000);">显示加载</button>
+<button onclick="Z.loading('', false); window.setTimeout(function(){Z.loadingHide()}, 5000);">显示简易加载</button>
+<button onclick="Z.loading('loading…'); window.setTimeout(function(){Z.loadingHide()}, 5000);">显示加载文字</button>
+
+<h3>card 控件</h3>
+<div class="card mb-3">
+  <div class="card-header">
+    标题AAA
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+
+<div class="card panel-primary mb-3">
+  <div class="card-header">
+    标题AAA panel-primary
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-secondary mb-3">
+  <div class="card-header">
+    标题AAA panel-secondary
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-success mb-3">
+  <div class="card-header">
+    标题AAA panel-success
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-danger mb-3">
+  <div class="card-header">
+    标题AAA panel-danger
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-warning mb-3">
+  <div class="card-header">
+    标题AAA panel-warning
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-info mb-3">
+  <div class="card-header">
+    标题AAA panel-info
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+<div class="card panel-dark mb-3">
+  <div class="card-header">
+    标题AAA panel-dark
+  </div>
+  <div class="card-body">
+    Card 内容 card-body
+  </div>
+</div>
+
+<h3>HTML5 边框</h3>
+
+<div class="p-1 mt-3" style="border:dotted 5px #999;">
+dotted	定义点状边框。在大多数浏览器中呈现为实线。
+</div>
+<div class="p-1 mt-3" style="border:dashed 5px #999;">
+dashed	定义虚线。在大多数浏览器中呈现为实线。
+</div>
+<div class="p-1 mt-3" style="border:solid 5px #999;">
+solid	定义实线。
+</div>
+<div class="p-1 mt-3" style="border:double 5px #999;">
+double	定义双线。双线的宽度等于 border-width 的值。
+</div>
+<div class="p-1 mt-3" style="border:groove 5px #999;">
+groove	定义 3D 凹槽边框。其效果取决于 border-color 的值。
+</div>
+<div class="p-1 mt-3" style="border:ridge 5px #999;">
+ridge	定义 3D 垄状边框。其效果取决于 border-color 的值。
+</div>
+<div class="p-1 mt-3" style="border:inset 5px #999;">
+inset	定义 3D inset 边框。其效果取决于 border-color 的值。
+</div>
+<div class="p-1 mt-3" style="border:outset 5px #999;">
+outset	定义 3D outset 边框。其效果取决于 border-color 的值。
+</div>
+
+<h3>小饼图</h3>
+
+<span class="pie" title="5%"></span>
+<span class="pie" title="10%"></span>
+<span class="pie" title="45%"></span>
+<span class="pie" title="50%"></span>
+<span class="pie" title="75%"></span>
+<span class="pie" title="95%"></span>
+<span class="pie" title="95%" data-color='#B58500'></span>
+
+<h3>背景进度</h3>
+
+<table style="width:300px; background:#eee;" class="text-stroke">
+  <tr>
+  <td data-background-progress="45">45%</td>
+  </tr>
+  <tr>
+  <td data-background-progress="60">60%</td>
+  </tr>
+  <tr>
+  <td data-background-progress="80|red">80%</td>
+  </tr>
+  <tr>
+  <td data-background-progress="25">25%</td>
+  </tr>
+  <tr>
+  <td data-background-progress="5">5%</td>
+  </tr>
+</table>
+
+
+<h3>日期下拉框</h3>
+<link href="/static/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/static/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+<script src="/static/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<input type="text" data-date-list="2019-05-03,2019-05-08" class="datepicker form-control auto-submit" name="dt" value="2019-05-01">
+
+<h3>懒加载图片</h3>
+<img src="/static/img/flow.PNG" loading="lazy" alt=".." />
 
 { include '../main_bottom.html' }
