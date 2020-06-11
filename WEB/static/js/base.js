@@ -810,6 +810,7 @@ var Z = {
                 option.error({
                     result:-2,
                     error:err,
+                    content:xmlobj.responseText,
                 });
             },
         });
