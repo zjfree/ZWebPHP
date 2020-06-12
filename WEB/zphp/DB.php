@@ -898,6 +898,22 @@ class DB
     }
 
 	/**
+     * 判断表格是否存在
+     */
+    public function existTable()
+    {
+		$table = trim($this -> table);
+		if (empty($table))
+		{
+			return false;
+		}
+		
+        $list = $this -> call_sql("SHOW TABLES LIKE '" . $this -> table . "'");
+        
+        return !empty($list);
+    }
+
+	/**
      * 分页查询
      */
 	public function selectPage($page = 1, $page_size = 30)
