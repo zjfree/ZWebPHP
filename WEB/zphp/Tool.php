@@ -174,6 +174,34 @@ class Tool
 	{
 		return $_SERVER['REMOTE_ADDR'];
 	}
+
+    /**
+     * 是否本地访问（局域网/本机）
+     */
+	public static function isLocal()
+	{
+		$ip = Tool::ip();
+		if ($ip == '127.0.0.1' || $ip == '::1')
+		{
+			return true;
+		}
+
+		$server_ip = $_SERVER['SERVER_ADDR'];
+		if ($ip == $server_ip)
+		{
+			return true;
+		}
+
+		foreach (['127.', '10.', '192.'] as $r)
+		{
+			if (strpos($ip, $r) === 0)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
     /**
      * 循环检测并创建文件夹
