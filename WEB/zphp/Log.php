@@ -104,9 +104,9 @@ class Log
         else
         {
             $str .= json_encode($params, JSON_UNESCAPED_UNICODE);
-            if (strlen($str) > 100)
+            if (strlen($str) > 300)
             {
-                $str = \substr($str, 0, 100) . '...';
+                $str = \substr($str, 0, 300) . '...';
             }
         }
 
