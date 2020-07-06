@@ -262,10 +262,10 @@ class Tool
 		if ($hour > 0) {
 			$duration .= (int) $hour.'小时';
 		}
-		if ($minute > 0) {
+		if ($minute > 0 && $day == 0) {
 			$duration .= (int) $minute.'分钟';
 		}
-		if ($second > 0 && $day == 0) {
+		if ($second > 0 && $day == 0 && $hour == 0) {
 			$duration .= (int) $second.'秒';
 		}
 
