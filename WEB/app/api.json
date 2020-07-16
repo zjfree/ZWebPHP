@@ -1,9 +1,9 @@
 {
-    "build_time": "2019-10-11 16:13:59",
+    "build_time": "2020-07-16 09:57:15",
     "class_list": [
         {
             "code": "Client",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Client.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/Client.php",
             "need_login": true,
             "doc": {
                 "name": "客户维护",
@@ -219,7 +219,7 @@
         },
         {
             "code": "Doc",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Doc.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/Doc.php",
             "need_login": true,
             "doc": {
                 "name": "文档中心",
@@ -243,7 +243,7 @@
         },
         {
             "code": "LocalService",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/LocalService.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/LocalService.php",
             "need_login": false,
             "doc": {
                 "name": "本地服务",
@@ -267,7 +267,7 @@
         },
         {
             "code": "My",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/My.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/My.php",
             "need_login": true,
             "doc": {
                 "name": "当前用户",
@@ -421,7 +421,7 @@
         },
         {
             "code": "Service",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Service.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/Service.php",
             "need_login": false,
             "doc": {
                 "name": "服务",
@@ -462,7 +462,7 @@
         },
         {
             "code": "Sys",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Sys.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/Sys.php",
             "need_login": true,
             "doc": {
                 "name": "系统",
@@ -519,7 +519,7 @@
         },
         {
             "code": "SysBase",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/SysBase.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/SysBase.php",
             "need_login": true,
             "doc": {
                 "name": "系统基础",
@@ -678,6 +678,22 @@
                             "require": false,
                             "value": "30",
                             "memo": ""
+                        },
+                        {
+                            "code": "type",
+                            "name": "类型",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "user",
+                            "name": "用户",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
                         }
                     ]
                 },
@@ -713,6 +729,14 @@
                             "type": "int",
                             "require": false,
                             "value": "30",
+                            "memo": ""
+                        },
+                        {
+                            "code": "user",
+                            "name": "用户",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
                             "memo": ""
                         }
                     ]
@@ -765,7 +789,7 @@
         },
         {
             "code": "SysSetting",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/SysSetting.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/SysSetting.php",
             "need_login": true,
             "doc": {
                 "name": "系统配置",
@@ -817,7 +841,7 @@
         },
         {
             "code": "Ui",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/Ui.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/Ui.php",
             "need_login": true,
             "doc": {
                 "name": "UI类",
@@ -1080,7 +1104,7 @@
         },
         {
             "code": "User",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/User.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/User.php",
             "need_login": false,
             "doc": {
                 "name": "用户",
@@ -1143,7 +1167,7 @@
         },
         {
             "code": "UserManage",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/UserManage.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/UserManage.php",
             "need_login": true,
             "doc": {
                 "name": "用户管理",
@@ -1367,7 +1391,7 @@
         },
         {
             "code": "UserType",
-            "file": "D:\\WORK\\ZWebPHP\\WEB\\app\/api\/UserType.php",
+            "file": "D:\\GIT\\ZWebPHP\\WEB\\app\/api\/UserType.php",
             "need_login": true,
             "doc": {
                 "name": "用户类型管理",

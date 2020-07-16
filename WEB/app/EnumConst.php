@@ -1,5 +1,5 @@
 <?php
-// 自动生成于 2019-10-11 16:13:59
+// 自动生成于 2020-07-16 09:57:15
 namespace app;
 
 class EnumConst
@@ -10,6 +10,8 @@ class EnumConst
 	const STATUS_DELETED = 2;	// 删除
 
 	// 返回状态
+	const RESULT_TID = -101;	// _tid无效
+	const RESULT_TOKEN = -100;	// token解析异常
 	const RESULT_EXCEPTION = -90;	// 处理异常
 	const RESULT_POWER = -31;	// 无权限
 	const RESULT_OFFLINE = -30;	// 未登录

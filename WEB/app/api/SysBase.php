@@ -184,26 +184,54 @@ class SysBase extends ApiBase
 	 * @param date dt 查询日期 [today]
 	 * @param int page 分页 [1]
 	 * @param int page_size 单页数量 [30]
+	 * @param string type 类型
+	 * @param string user 用户
 	 */
 	public static function log($params)
 	{
 		$dt = $params['dt'];
 		$page = $params['page'];
 		$page_size = $params['page_size'];
+		$type = $params['type'];
+		$user = $params['user'];
 
-		$dt_end = Tool::addDay($dt, 1);
+		$count = 0;
+		$list = [];
 
-		list($count, $list) = DB::table('sys_log')
-			-> where('add_time', 'between', [$dt, $dt_end])
-			-> order('id DESC')
-			-> selectPage($page, $page_size);
-		
+		if (empty($user))
+		{
+			$dt_end = Tool::addDay($dt, 1);
+	
+			list($count, $list) = DB::table('sys_log')
+				-> where('add_time', 'between', [$dt, $dt_end])
+				-> whereIf($type != '', 'type', $type)
+				-> order('id DESC')
+				-> selectPage($page, $page_size);
+		}
+		else
+		{
+			$user_obj = DB::table('user')
+				-> where('account', $user)
+				-> whereOr('name', $user)
+				-> find();
+			if (!empty($user_obj))
+			{
+				list($count, $list) = DB::table('sys_log')
+					-> where('user_id', $user_obj['id'])
+					-> whereIf($type != '', 'type', $type)
+					-> order('id DESC')
+					-> selectPage($page, $page_size);
+			}
+		}
+
 		$data = [
 			'page'      => $page,
 			'page_size' => $page_size,
 			'dt'        => $dt,
 			'count'     => $count,
 			'list'      => $list,
+			'type'      => $type,
+			'user'      => $user,
 		];
 
 		return self::_success($data);
@@ -215,6 +243,7 @@ class SysBase extends ApiBase
 	 * @param date dt 查询日期 [today]
 	 * @param int page 分页 [1]
 	 * @param int page_size 单页数量 [30]
+	 * @param string user 用户
 	 */
 	public static function login_log($params)
 	{
@@ -227,14 +256,35 @@ class SysBase extends ApiBase
 		$dt = $params['dt'];
 		$page = $params['page'];
 		$page_size = $params['page_size'];
+		$user = $params['user'];
 
-		$dt_end = Tool::addDay($dt, 1);
+		$count = 0;
+		$list = [];
 
-		list($count, $list) = DB::table('user_login')
-			-> where('add_time', 'between', [$dt, $dt_end])
-			-> order('id DESC')
-			-> selectPage($page, $page_size);
-		
+		if (empty($user))
+		{
+			$dt_end = Tool::addDay($dt, 1);
+	
+			list($count, $list) = DB::table('user_login')
+				-> where('add_time', 'between', [$dt, $dt_end])
+				-> order('id DESC')
+				-> selectPage($page, $page_size);
+		}
+		else
+		{
+			$user_obj = DB::table('user')
+				-> where('account', $user)
+				-> whereOr('name', $user)
+				-> find();
+			if (!empty($user_obj))
+			{
+				list($count, $list) = DB::table('user_login')
+					-> where('user_id', $user_obj['id'])
+					-> order('id DESC')
+					-> selectPage($page, $page_size);
+			}
+		}
+
 		foreach ($list as &$r)
 		{
 			$t1 = strtotime($r['add_time']);
