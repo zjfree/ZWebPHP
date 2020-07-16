@@ -299,6 +299,7 @@ class SysBase extends ApiBase
 			'dt'        => $dt,
 			'count'     => $count,
 			'list'      => $list,
+			'user'      => $user,
 		];
 
 		return self::_success($data);
