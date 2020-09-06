@@ -281,6 +281,10 @@ class Tool
 		{
 			return '0';
 		}
+
+		$byte_raw = $byte;
+		$byte = abs($byte);
+
 		$type_list = ["B", "K", "M", "G", "T"];
 		$counter = 0;
 		while($byte >= 1024)
@@ -298,7 +302,7 @@ class Tool
 			$byte = round($byte, 2);
 		}
 		
-		return $byte . $type_list[$counter];
+		return ($byte_raw < 0 ? '-' : '') . $byte . $type_list[$counter];
 	}
 
 	/**
