@@ -19,10 +19,14 @@ h1,h2,h3,h4 {
 h1{font-size:30px; color:#F7013B; padding:10px 0;}
 h2{color:#0188DE; font-size:16px; padding:0;}
 
-#page{max-width:910px; padding:20px 20px 40px 20px; margin-top:80px;}
+#page{max-width:910px; padding:20px 20px 40px 20px; margin-top:30px;}
 .button{width:180px; height:28px; margin-left:0px; margin-top:10px; background:#009CFF; border-bottom:4px solid #0188DE; text-align:center;}
 .button a{width:180px; height:28px; display:block; font-size:14px; color:#fff;}
 .button a:hover{background:#5BBFFF;}
+
+.msgbox{
+	margin:0 10px;
+}
 </style>
 
 </head>
@@ -38,9 +42,20 @@ h2{color:#0188DE; font-size:16px; padding:0;}
 	</pre>
 	{ /if }
 	<div class="button">
-		<a href="/">返回首页</a>
+		<a id="aHome" href="/" style="display: none;">返回首页</a>
+		<a id="aClose" href="javascript:top.Z.alertFrameClose();" style="display: none;">关闭</a>
 	</div>
 </div>
-
+<script>
+if (window.top == window.self)
+{
+	document.getElementById('aHome').style.display = 'block';
+}
+else
+{
+	document.getElementById('aClose').style.display = 'block';
+	document.body.classList.add('msgbox');
+}
+</script>
 </body>
 </html>
