@@ -46,5 +46,3 @@ class Sys extends ApiBase
 		return self::_success();
 	}
 }
-
-
