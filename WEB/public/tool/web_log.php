@@ -2,7 +2,7 @@
 
 set_time_limit(1);
 
-$file_path = '../runtime/log/web_log_' . date('Ymd') . '.log';
+$file_path = '../../runtime/log/web_log_' . date('Ymd') . '.log';
 
 $str = 'url:' . (@$_SERVER['HTTP_REFERER'] ?: '') . PHP_EOL;
 $str .= 'user_agent:' . (@$_SERVER['HTTP_USER_AGENT'] ?: '') . PHP_EOL;

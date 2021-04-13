@@ -8,7 +8,7 @@ set_time_limit(30);
 // 开始运行时间和内存使用
 define('ZPHP', '2.0');
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT_PATH', dirname(__FILE__) . DS);
+define('ROOT_PATH', dirname(dirname(__FILE__)) . DS);
 
 // 自动加载
 require ROOT_PATH . "vendor/autoload.php";

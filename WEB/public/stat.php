@@ -1,7 +1,7 @@
 <?php
 
 error_reporting(E_ALL & ~E_NOTICE);
-define('ROOT_PATH', dirname(__FILE__) . '/');
+define('ROOT_PATH', dirname(dirname(__FILE__)) . '/');
 
 $now = date('Y-m-d H:i:s');
 $host = '_null';

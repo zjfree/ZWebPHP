@@ -25,7 +25,7 @@ if (!in_array($ip, ['::1', '127.0.0.1', 'localhost']))
 header('Content-type: text/plain; charset=utf-8');
 
 define('DS', DIRECTORY_SEPARATOR);
-define('ROOT_PATH', dirname(dirname(__FILE__)) . DS);
+define('ROOT_PATH', dirname(dirname(dirname(__FILE__))) . DS);
 
 // 自动加载
 require ROOT_PATH . "vendor/autoload.php";

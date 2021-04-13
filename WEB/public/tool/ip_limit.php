@@ -6,7 +6,7 @@ function ip_limit_check()
     $ip = $_SERVER['REMOTE_ADDR'];
     $ip = str_replace([':', '.'], '_', $ip);
     
-    $ip_path = '../runtime/ip/ip_' . $ip . '.dat';
+    $ip_path = '../../runtime/ip/ip_' . $ip . '.dat';
     $content = @file_get_contents($ip_path);
     $content = trim($content);
     if ($content == 'pass')
