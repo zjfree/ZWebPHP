@@ -9,6 +9,7 @@ use PDO;
 class DB
 {
     private static $isInit = false;
+    private static $conn_list = [];
 
 	// 默认连接配置
 	protected static $config = [
@@ -80,8 +81,16 @@ class DB
         }
 
         $this -> db_key = $db_key;
-        $db = self::$config[$this -> db_key];
+        $this -> table = $table;
+
+        if (isset(self::$conn_list[$this -> db_key]))
+        {
+            $this -> conn = self::$conn_list[$this -> db_key];
+            return;
+        }
 		
+        // 创建新连接
+        $db = self::$config[$this -> db_key];
 		try
 		{
 			$conn = new PDO($db['dsn'], $db['user'], $db['password'], [
@@ -98,7 +107,7 @@ class DB
 		$conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$conn -> setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
         
-        $this -> table = $table;
+        self::$conn_list[$this -> db_key] = $conn;
 		$this -> conn = $conn;
     }
     
