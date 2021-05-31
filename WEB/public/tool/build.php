@@ -113,6 +113,7 @@ $res = [
 	'class_list' => $class_list,
 ];
 file_put_contents(ROOT_PATH . 'app/api.json', json_encode($res, 384));
+file_put_contents(ROOT_PATH . 'app/api_json.php', '<?php return ' . var_export($res, true) . ';');
 
 $ms = round((microtime(true) - $ms) * 1000);
 echo PHP_EOL . 'API文档生成完成；';

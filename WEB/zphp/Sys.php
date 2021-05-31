@@ -416,8 +416,9 @@ class Sys
 	private static function check($api, $params)
 	{
 		// 获取接口列表
-		$api_list = \file_get_contents(ROOT_PATH . "app/api.json");
-		$api_list = json_decode($api_list, true);
+		$api_list = require ROOT_PATH . 'app/api_json.php';
+		//$api_list = \file_get_contents(ROOT_PATH . "app/api.json");
+		//$api_list = json_decode($api_list, true);
 		$api_list = $api_list['class_list'];
 
 		// 获取API
