@@ -1,6 +1,8 @@
 <?php
 namespace app\api;
 
+use zphp\FileMQ;
+
 /**
  * UI类
  */
@@ -164,6 +166,51 @@ class Ui extends \zphp\ApiBase
 	public static function page_register($params)
 	{
 		return self::_success();
+	}
+	
+	/**
+	 * 测试
+	 * @param string type 类型
+	 * @param string content 内容
+	 */
+	public static function file_mq($params = [])
+	{
+		$content = $params['content'];
+
+		$mq = new FileMQ();
+		$type = $params['type'];
+
+		$data = [];
+		switch ($type)
+		{
+			case 'push':
+				$mq->push($content);
+				$data['push'] = 'push OK';
+				break;
+			case 'push_list':
+				$list = [];
+				for ($i=0; $i<100; $i++)
+				{
+					$list[] = ['id'=>$i, 'data'=>$i*$i];
+				}
+				$mq->pushList($list);
+				$data['push_list'] = 'push_list OK';
+				break;
+			case 'pop':
+				$data['pop'] = $mq->pop();
+				break;
+			case 'pop_list':
+				$data['pop_list'] = $mq->popList(10);
+				break;
+			case 'query':
+				$data['query'] = $mq->getCfg();
+				break;
+			case 'clear':
+				$data['clear'] = $mq->clear();
+				break;
+		}
+		
+		return self::_success($data);
 	}
 }
 

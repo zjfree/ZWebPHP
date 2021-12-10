@@ -26,6 +26,8 @@ $menu_list = [
     'ui_db'    => ['name' => '数据库', 'icon' => 'fa fa-database', 'href' => '/index.php?_=ui::db'],
     'ui_tool'  => ['name' => '工具类', 'icon' => 'fa fa-wrench', 'href' => '/index.php?_=ui::tool'],
     'ui_api'   => ['name' => 'API开发', 'icon' => 'fa fa-plug', 'href' => '/index.php?_=ui::api'],
+    'ui_mq'    => ['name' => '消息队列', 'icon' => 'fa fa-gg', 'href' => '/index.php?_=ui::file_mq'],
+    'ui_icon'    => ['target' => '_blank', 'name' => '系统图标', 'icon' => 'fa fa-plane', 'href' => '/tool/icon_fa.html'],
     'ui_table' => ['name' => '表格控制', 'icon' => 'fa fa-table',
         'list' => [
             'table1' => ['name' => '表格列表', 'icon' => 'fa fa-table', 'href' => '/index.php?_=ui::table1',],

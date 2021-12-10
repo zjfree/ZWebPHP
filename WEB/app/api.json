@@ -1,5 +1,5 @@
 {
-    "build_time": "2021-05-31 11:14:55",
+    "build_time": "2021-12-10 09:08:53",
     "class_list": [
         {
             "code": "Client",
@@ -1099,6 +1099,34 @@
                         "return": ""
                     },
                     "params": []
+                },
+                {
+                    "code": "file_mq",
+                    "doc": {
+                        "name": "测试",
+                        "memo": "",
+                        "author": "",
+                        "date": "",
+                        "return": ""
+                    },
+                    "params": [
+                        {
+                            "code": "type",
+                            "name": "类型",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        },
+                        {
+                            "code": "content",
+                            "name": "内容",
+                            "type": "string",
+                            "require": false,
+                            "value": null,
+                            "memo": ""
+                        }
+                    ]
                 }
             ]
         },

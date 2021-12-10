@@ -1,0 +1,40 @@
+{ include '../page_top.html' }
+
+<style>
+    body{
+        margin:0 10px;
+    }
+</style>
+
+<h3>文件消息队列测试</h3>
+<hr>
+<div>
+    内容：<input id="txtContent" type="text" value="hello 123" /><br><br>
+
+    <button onclick="cmd('push', $('#txtContent').val() + ':' + (ii++))">入栈</button>
+    <button onclick="cmd('pop')">出栈</button>
+    <button onclick="cmd('push_list')">批量入栈</button>
+    <button onclick="cmd('pop_list')">批量出栈</button>
+    <button onclick="cmd('query')">查询</button>
+    <button onclick="cmd('clear')">清空</button>
+</div>
+
+<hr>
+<div id="divInfo"></div>
+
+<script>
+    var ii = 0;
+    function cmd(type, content='')
+    {
+        Z.ajax({
+            url:'index.php?_=ui::file_mq',
+            data:{type:type, content:content},
+            success:function(res){
+                $('#divInfo').prepend('<div>' + JSON.stringify(res.data[type]) + '</div>');
+            },
+            error:function(){},
+        });
+    }
+</script>
+
+{ include '../page_bottom.html' }

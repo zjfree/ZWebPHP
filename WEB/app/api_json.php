@@ -1,5 +1,5 @@
 <?php return array (
-  'build_time' => '2021-05-31 11:14:55',
+  'build_time' => '2021-12-10 09:08:53',
   'class_list' => 
   array (
     0 => 
@@ -1369,6 +1369,39 @@
           ),
           'params' => 
           array (
+          ),
+        ),
+        19 => 
+        array (
+          'code' => 'file_mq',
+          'doc' => 
+          array (
+            'name' => '测试',
+            'memo' => '',
+            'author' => '',
+            'date' => '',
+            'return' => '',
+          ),
+          'params' => 
+          array (
+            0 => 
+            array (
+              'code' => 'type',
+              'name' => '类型',
+              'type' => 'string',
+              'require' => false,
+              'value' => NULL,
+              'memo' => '',
+            ),
+            1 => 
+            array (
+              'code' => 'content',
+              'name' => '内容',
+              'type' => 'string',
+              'require' => false,
+              'value' => NULL,
+              'memo' => '',
+            ),
           ),
         ),
       ),
