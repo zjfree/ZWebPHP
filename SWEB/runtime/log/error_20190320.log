@@ -1,0 +1,18 @@
+2019-03-20 11:00:32 SQL ERROR 
+[SQL]
+UPDATE a12
+SET name=:p1,add_time=now()
+WHERE id = 1
+[参数]
+array (
+  'p1' => 'a1a1a2',
+)
+[错误详情]
+PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'test.a12' doesn't exist in D:\ENH_WORK\BASE\SWEB\classes\DB.php:50
+Stack trace:
+#0 D:\ENH_WORK\BASE\SWEB\classes\DB.php(50): PDOStatement->execute(Array)
+#1 D:\ENH_WORK\BASE\SWEB\classes\DB.php(176): DB::runSql('UPDATE a12\r\nSET...', Array)
+#2 D:\ENH_WORK\BASE\SWEB\controller\Sys.php(16): DB::update('a12', Array)
+#3 D:\ENH_WORK\BASE\SWEB\index.php(73): SysController::index()
+#4 {main}
+

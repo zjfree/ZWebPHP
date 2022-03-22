@@ -1,0 +1,27 @@
+<?php include './view/top.html' ?>
+
+当前用户：<?=Sys::$user['name']?>
+<?php $abc123=false;?>
+<?=$abc123?:'a555'?>
+<hr>
+hello <?= $res['data']?>
+
+<button onclick="ajax_test();">ajax</button>
+
+<script>
+function ajax_test()
+{
+    $.ajax({
+        url:'index.php?_=sys::ajax',
+        type:'POST',
+        data:{
+            a:123,
+        },
+        success:function(res){
+            console.log(res);
+        }
+    });
+}
+</script>
+
+<?php include './view/bottom.html' ?>
